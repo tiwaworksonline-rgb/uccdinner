@@ -10,7 +10,9 @@ const allowedOrigins = new Set([
 
 const attributeNames = [
   "FULL_NAME","PHONE_RAW","CITY_STATE","COUNTRY","NRW_INTERESTS",
-  "INVEST_INTERESTS","INVEST_RANGE","TRAVEL_INTERESTS","SOURCE"
+  "INVEST_INTERESTS","INVEST_RANGE","TRAVEL_INTERESTS","SOURCE",
+  "LEAD_TYPE","ORGANIZATION","ROLE_TITLE","PROFILE_URL","SPEAKER_TOPICS",
+  "PROPOSED_TOPIC","AUDIENCE_TAKEAWAY","SPEAKER_BIO","CIVIC_INTERESTS","CIVIC_SUGGESTION"
 ];
 
 let attributesReady = false;
@@ -110,6 +112,7 @@ const server=http.createServer(async (req,res)=>{
       const phone=String(body.phone||"").trim();
       const city=String(body.city||"").trim();
       const country=String(body.country||"").trim();
+      const leadType=String(body.leadType||"general").trim();
 
       if(!name || !email || !phone || !city || !country){
         return send(res,400,{ok:false,error:"Please complete all required fields."},origin);
@@ -129,7 +132,17 @@ const server=http.createServer(async (req,res)=>{
         INVEST_INTERESTS:cleanList(body.investmentInterests),
         INVEST_RANGE:String(body.investmentRange||"").slice(0,200),
         TRAVEL_INTERESTS:cleanList(body.travelInterests),
-        SOURCE:"NRW Website"
+        SOURCE:"NRW Website",
+        LEAD_TYPE:leadType.slice(0,200),
+        ORGANIZATION:String(body.organization||"").slice(0,200),
+        ROLE_TITLE:String(body.role||"").slice(0,200),
+        PROFILE_URL:String(body.profileUrl||"").slice(0,200),
+        SPEAKER_TOPICS:cleanList(body.speakerTopics),
+        PROPOSED_TOPIC:String(body.proposedTopic||"").slice(0,200),
+        AUDIENCE_TAKEAWAY:String(body.takeaway||"").slice(0,200),
+        SPEAKER_BIO:String(body.bio||"").slice(0,200),
+        CIVIC_INTERESTS:cleanList(body.civicInterests),
+        CIVIC_SUGGESTION:String(body.topicSuggestion||"").slice(0,200)
       };
 
       await brevo("/contacts",{
