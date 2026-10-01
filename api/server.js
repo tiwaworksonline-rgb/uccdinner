@@ -171,31 +171,6 @@ server.listen(PORT,async()=>{
   try{
     await brevo("/account",{method:"GET"});
     console.log("BREVO_CONNECTION_OK");
-    const testEmail="nrw-form-test@example.com";
-    const testResponse=await fetch("http://127.0.0.1:"+PORT+"/api/leads",{
-      method:"POST",
-      headers:{
-        "Origin":"https://nigerian-reunion-weekend-atlanta.onrender.com",
-        "Content-Type":"application/json"
-      },
-      body:JSON.stringify({
-        name:"NRW Form Test",
-        email:testEmail,
-        phone:"555-555-0100",
-        city:"Atlanta, GA",
-        country:"United States",
-        interests:["Reunion Weekend"],
-        investmentInterests:[],
-        investmentRange:"",
-        travelInterests:[],
-        leadType:"general"
-      })
-    });
-    const testBody=await testResponse.json().catch(()=>({}));
-    if(!testResponse.ok) throw new Error("FORM_TEST_FAILED "+testResponse.status+" "+(testBody.error||""));
-    console.log("NRW_FORM_TEST_OK");
-    await brevo("/contacts/"+encodeURIComponent(testEmail),{method:"DELETE"});
-    console.log("NRW_FORM_TEST_CONTACT_DELETED");
   }catch(err){
     console.error("BREVO_CONNECTION_FAILED",err.status||"",err.details?.message||err.message);
   }
