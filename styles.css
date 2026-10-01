@@ -226,3 +226,67 @@ linear-gradient(135deg,#07150f 0%,#0b2419 65%,#0d3322 100%);color:#fff;display:f
 .opportunities-bottom-cta{margin:0 14px 40px;padding:48px 24px}
 }
 @media(max-width:560px){.opportunity-card ul{grid-template-columns:1fr}.opportunities-hero h1{font-size:58px}}
+
+/* Nigeria destination page */
+.nigeria-page{background:var(--paper)}
+.nigeria-hero{position:relative;overflow:hidden;min-height:690px;padding:125px clamp(24px,7vw,110px) 90px;background:radial-gradient(circle at 78% 27%,rgba(184,246,66,.12),transparent 24%),radial-gradient(circle at 68% 52%,rgba(25,167,102,.34),transparent 30%),linear-gradient(135deg,#07150f 0%,#0a2117 62%,#0d3825 100%);color:#fff;display:flex;align-items:flex-end}
+.nigeria-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:62px 62px;mask-image:linear-gradient(to bottom,#000,transparent 96%)}
+.nigeria-hero-copy{position:relative;z-index:2;max-width:1000px}.nigeria-hero .section-kicker{color:var(--lime)}
+.nigeria-hero h1{font:800 clamp(62px,9vw,130px)/.84 "Manrope",sans-serif;letter-spacing:-.065em;text-transform:uppercase;margin:0;max-width:1050px}
+.nigeria-hero p{max-width:820px;font-size:20px;line-height:1.65;color:rgba(255,255,255,.76);margin:30px 0 0}
+.nigeria-hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+.nigeria-stamp{position:absolute;right:7vw;top:145px;width:154px;height:154px;border:1px solid rgba(255,255,255,.24);border-radius:50%;display:grid;place-items:center;transform:rotate(7deg);z-index:2}
+.nigeria-stamp strong{font:800 42px/1 "Manrope"}.nigeria-stamp span{position:absolute;bottom:28px;font:800 10px/1 "Manrope";letter-spacing:.15em;color:var(--lime)}
+.nigeria-intro{padding:105px clamp(24px,7vw,110px) 60px;background:var(--cream);display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.nigeria-intro h2,.nigeria-moments h2,.nigeria-sectors h2,.nigeria-diaspora h2,.nigeria-bottom-cta h2{font:800 clamp(42px,5.8vw,78px)/.94 "Manrope";letter-spacing:-.055em;margin:0}
+.nigeria-intro p{font-size:18px;line-height:1.75;color:#46534d;margin:0 0 18px}
+.nigeria-path-grid{padding:0 clamp(24px,7vw,110px) 110px;background:var(--cream);display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.nigeria-path-card{min-height:520px;border-radius:30px;padding:36px;display:flex;flex-direction:column}
+.travel-path{background:#fff;border:1px solid var(--line)}
+.invest-path{background:linear-gradient(145deg,#0e7d51,#073c29);color:#fff}
+.nigeria-path-label{display:flex;justify-content:space-between;align-items:center;font:800 11px "Manrope";letter-spacing:.12em}
+.nigeria-path-label span{color:var(--green)}.invest-path .nigeria-path-label span{color:var(--lime)}
+.nigeria-path-card h3{font:800 clamp(38px,4vw,58px)/.95 "Manrope";letter-spacing:-.05em;margin:76px 0 18px}
+.nigeria-path-card>p{font-size:17px;line-height:1.68;color:#536059;max-width:650px}.invest-path>p{color:rgba(255,255,255,.74)}
+.nigeria-chip-row{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 30px}
+.nigeria-chip-row span{border:1px solid var(--line);border-radius:999px;padding:9px 12px;font-size:12px;font-weight:700}
+.invest-path .nigeria-chip-row span{border-color:rgba(255,255,255,.18)}
+.nigeria-path-card .opportunity-button{margin-top:auto}
+.nigeria-experience-band{padding:110px clamp(24px,7vw,110px);background:var(--ink);color:#fff}
+.nigeria-experience-band .section-kicker{color:var(--lime)}
+.nigeria-experience-band>h2{font:800 clamp(44px,6vw,82px)/.94 "Manrope";letter-spacing:-.055em;margin:0 0 58px;max-width:900px}
+.nigeria-lens-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.13)}
+.nigeria-lens-grid>div{background:var(--ink);padding:34px;min-height:255px}
+.nigeria-lens-grid span{font:800 11px "Manrope";color:var(--lime)}
+.nigeria-lens-grid h3{font:800 28px/1 "Manrope";letter-spacing:-.035em;margin:58px 0 12px}
+.nigeria-lens-grid p{color:rgba(255,255,255,.65);line-height:1.6;margin:0}
+.nigeria-moments{padding:110px clamp(24px,7vw,110px);background:var(--paper)}
+.nigeria-moments-heading{display:grid;grid-template-columns:1.1fr .9fr;gap:70px;align-items:end;margin-bottom:52px}
+.nigeria-moments-heading p{font-size:18px;line-height:1.7;color:var(--muted);margin:0}
+.nigeria-moment-list{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.nigeria-moment-list>div{background:#fff;border:1px solid var(--line);border-radius:22px;padding:26px;min-height:260px}
+.nigeria-moment-list span{font:800 11px "Manrope";letter-spacing:.13em;color:var(--green)}
+.nigeria-moment-list h3{font:800 26px/1.05 "Manrope";letter-spacing:-.035em;margin:68px 0 12px}
+.nigeria-moment-list p{color:var(--muted);line-height:1.6;margin:0}
+.nigeria-inline-cta{margin-top:28px}
+.nigeria-sectors{padding:105px clamp(24px,7vw,110px);background:var(--cream);display:grid;grid-template-columns:.85fr 1.15fr;gap:80px}
+.nigeria-sectors-heading{grid-row:span 2}
+.nigeria-sector-cloud{display:flex;flex-wrap:wrap;gap:10px;align-content:start}
+.nigeria-sector-cloud span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:13px 16px;font-weight:700}
+.nigeria-invest-copy{border-top:1px solid var(--line);padding-top:28px}
+.nigeria-invest-copy p{font-size:17px;line-height:1.7;color:#52605a}
+.nigeria-invest-copy a{color:var(--green);text-decoration:none}
+.nigeria-diaspora{padding:100px clamp(24px,7vw,110px);background:linear-gradient(135deg,#0d7b50,#07150f);color:#fff;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end}
+.nigeria-diaspora .section-kicker{color:var(--lime)}
+.nigeria-diaspora p{font-size:20px;line-height:1.7;color:rgba(255,255,255,.75);margin:0}
+.nigeria-bottom-cta{padding:95px clamp(24px,7vw,110px);display:grid;grid-template-columns:1fr auto;gap:60px;align-items:center;background:var(--paper)}
+.nigeria-bottom-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
+.nigeria-dark-outline{border-color:var(--line);color:var(--ink)}
+@media(max-width:900px){
+.nigeria-hero{min-height:610px;padding:112px 20px 70px}.nigeria-stamp{display:none}
+.nigeria-intro,.nigeria-path-grid,.nigeria-moments-heading,.nigeria-sectors,.nigeria-diaspora,.nigeria-bottom-cta{grid-template-columns:1fr;gap:36px}
+.nigeria-intro{padding:82px 20px 46px}.nigeria-path-grid{padding:0 20px 82px}
+.nigeria-lens-grid{grid-template-columns:1fr 1fr}.nigeria-experience-band,.nigeria-moments,.nigeria-sectors,.nigeria-diaspora,.nigeria-bottom-cta{padding-left:20px;padding-right:20px}
+.nigeria-moment-list{grid-template-columns:1fr 1fr}.nigeria-sectors-heading{grid-row:auto}.nigeria-bottom-actions{justify-content:flex-start}
+}
+@media(max-width:560px){.nigeria-hero h1{font-size:56px}.nigeria-lens-grid,.nigeria-moment-list{grid-template-columns:1fr}.nigeria-path-card{min-height:auto}.nigeria-path-card h3{margin-top:52px}}
