@@ -13,7 +13,8 @@ const attributeNames = [
   "INVEST_INTERESTS","INVEST_RANGE","TRAVEL_INTERESTS","SOURCE",
   "LEAD_TYPE","ORGANIZATION","ROLE_TITLE","PROFILE_URL","WEBSITE_URL","INSTAGRAM","LINKEDIN","TIKTOK","SPEAKER_TOPICS",
   "PROPOSED_TOPIC","AUDIENCE_TAKEAWAY","SPEAKER_BIO","CIVIC_INTERESTS","CIVIC_SUGGESTION",
-  "STAGE_NAME","TALENT_TYPES","PERFORMANCE_URL","GENRE_STYLE","AUDIENCE_SIZE","BOOKING_INTEREST","WHY_REUNION","BOOKING_CONTACT"
+  "STAGE_NAME","TALENT_TYPES","PERFORMANCE_URL","GENRE_STYLE","AUDIENCE_SIZE","BOOKING_INTEREST","WHY_REUNION","BOOKING_CONTACT",
+  "INQUIRY_SUBJECT","INQUIRY_MESSAGE"
 ];
 
 let attributesReady = false;
@@ -148,7 +149,12 @@ const server=http.createServer(async (req,res)=>{
       const country=String(body.country||"").trim();
       const leadType=String(body.leadType||"general").trim();
 
-      if(!name || !email || !phone || !city || !state || !country){
+      const inquiryMessage=String(body.message||"").trim();
+      if(leadType==="inquiry"){
+        if(!name || !email || !String(body.subject||"").trim() || !inquiryMessage){
+          return send(res,400,{ok:false,error:"Please complete all required fields."},origin);
+        }
+      } else if(!name || !email || !phone || !city || !state || !country){
         return send(res,400,{ok:false,error:"Please complete all required fields."},origin);
       }
       if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
@@ -191,7 +197,9 @@ const server=http.createServer(async (req,res)=>{
         AUDIENCE_SIZE:String(body.audienceSize||"").slice(0,200),
         BOOKING_INTEREST:cleanList(body.bookingInterest),
         WHY_REUNION:String(body.whyReunion||"").slice(0,500),
-        BOOKING_CONTACT:String(body.bookingContact||"").slice(0,200)
+        BOOKING_CONTACT:String(body.bookingContact||"").slice(0,200),
+        INQUIRY_SUBJECT:String(body.subject||"").slice(0,200),
+        INQUIRY_MESSAGE:inquiryMessage.slice(0,1000)
       };
 
       let listIds=[];
@@ -199,6 +207,8 @@ const server=http.createServer(async (req,res)=>{
         listIds=[await ensureBrevoList("Nigerian Reunion Travel Interest")];
       } else if(leadType==="talent"){
         listIds=[await ensureBrevoList("Nigerian Reunion Talent Interest")];
+      } else if(leadType==="inquiry"){
+        listIds=[await ensureBrevoList("Nigerian Reunion General Inquiries")];
       }
 
       await brevo("/contacts",{
