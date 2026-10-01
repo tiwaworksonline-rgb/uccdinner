@@ -151,6 +151,36 @@ document.addEventListener("DOMContentLoaded",()=>{
     };
   },"Thanks. You’re on the Nigerian Reunion travel interest list.");
 
+  bindSpecialForm("#talent-interest-form","#talent-form-status",(form)=>{
+    const talentTypes=[...form.querySelectorAll('input[name="talent_type"]:checked')].map(i=>i.value);
+    if(talentTypes.length===0) throw new Error("Choose at least one talent type.");
+    return {
+      leadType:"talent",
+      name:form.elements.name.value,
+      email:form.elements.email.value,
+      phone:form.elements.phone.value,
+      city:form.elements.city.value,
+      state:form.elements.state ? form.elements.state.value : "",
+      region:form.elements.region ? form.elements.region.value : "",
+      country:form.elements.country.value,
+      stageName:form.elements.stageName.value,
+      talentTypes,
+      websiteUrl:form.elements.websiteUrl.value,
+      instagram:form.elements.instagram.value,
+      tiktok:form.elements.tiktok.value,
+      performanceUrl:form.elements.performanceUrl.value,
+      genre:form.elements.genre.value,
+      audienceSize:form.elements.audienceSize.value,
+      bookingInterest:[...form.querySelectorAll('input[name="booking_interest"]:checked')].map(i=>i.value),
+      bio:form.elements.bio.value,
+      whyReunion:form.elements.whyReunion.value,
+      bookingContact:form.elements.bookingContact.value,
+      interests:["Talent Interest"],
+      investmentInterests:[],
+      travelInterests:[]
+    };
+  },"Thanks. Your talent interest has been submitted for programming review.");
+
   bindSpecialForm("#civic-interest-form","#civic-form-status",(form)=>({
     leadType:"civic",
     name:form.elements.name.value,
