@@ -108,3 +108,7 @@ footer{padding:34px clamp(24px,7vw,110px);display:flex;justify-content:space-bet
 .lead-submit span{font-size:20px}
 .form-status{text-align:center;color:var(--muted);font-size:12px;line-height:1.5;margin:12px 0 0}
 @media(max-width:900px){.join-shell{grid-template-columns:1fr;padding:72px 20px}.join-intro{position:static}.field-grid.two,.interest-grid{grid-template-columns:1fr}.lead-form-card{padding:24px}}
+
+.lead-submit:disabled{opacity:.72;cursor:wait}
+.form-status.is-success{color:#0f7a4c;font-weight:700}
+.form-status.is-error{color:#a42d2d;font-weight:700}
