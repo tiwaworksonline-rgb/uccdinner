@@ -79,6 +79,97 @@ async function brevo(path, options={}){
   return body;
 }
 
+let notificationMetaCache=null;
+
+async function getNotificationMeta(){
+  if(notificationMetaCache) return notificationMetaCache;
+
+  const [account,sendersData]=await Promise.all([
+    brevo("/account",{method:"GET"}),
+    brevo("/senders",{method:"GET"})
+  ]);
+
+  const recipient=String(account.email||"").trim();
+  const senders=Array.isArray(sendersData.senders)?sendersData.senders:[];
+  const sender=senders.find(s=>s.active!==false && s.email) || senders.find(s=>s.email);
+
+  if(!recipient || !sender?.email) throw new Error("Notification recipient or sender is unavailable.");
+
+  notificationMetaCache={
+    recipient,
+    sender:{name:sender.name||"Nigerian Reunion",email:sender.email}
+  };
+  return notificationMetaCache;
+}
+
+function htmlEscape(value){
+  return String(value||"")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+function leadLabel(leadType,body){
+  if(leadType==="talent") return "Talent Interest";
+  if(leadType==="speaker") return "Speaker Interest";
+  if(leadType==="travel") return "Travel Interest";
+  if(leadType==="inquiry") return "General Inquiry";
+  if(leadType==="civic") return "Civic Interest";
+  const interests=Array.isArray(body.interests)?body.interests.filter(Boolean):[];
+  return interests.length?interests.join(" + "):"General Registration";
+}
+
+async function sendLeadNotification({leadType,name,email,phone,city,state,region,country,body}){
+  const meta=await getNotificationMeta();
+  const label=leadLabel(leadType,body);
+  const location=[city,state==="OUTSIDE_US"?region:state,country].filter(Boolean).join(", ");
+  const rows=[
+    ["Name",name],
+    ["Email",email],
+    ["Phone",phone],
+    ["Location",location],
+    ["Type",label],
+    ["Interests",cleanList(body.interests)],
+    ["Investment interests",cleanList(body.investmentInterests)],
+    ["Investment range",body.investmentRange],
+    ["Travel interests",cleanList(body.travelInterests)],
+    ["Talent type",cleanList(body.talentTypes)],
+    ["Stage / Artist name",body.stageName],
+    ["Genre / Style",body.genre],
+    ["Booking interest",cleanList(body.bookingInterest)],
+    ["Website",body.websiteUrl],
+    ["Instagram",body.instagram],
+    ["LinkedIn",body.linkedin],
+    ["TikTok",body.tiktok],
+    ["Performance link",body.performanceUrl],
+    ["Organization",body.organization],
+    ["Role / Title",body.role],
+    ["Speaker topics",cleanList(body.speakerTopics)],
+    ["Proposed topic",body.proposedTopic],
+    ["Subject",body.subject],
+    ["Inquiry",body.message]
+  ].filter(([,v])=>String(v||"").trim());
+
+  const rowHtml=rows.map(([k,v])=>`<tr><td style="padding:8px 12px;border-bottom:1px solid #e7e7e7;font-weight:700;vertical-align:top;">${htmlEscape(k)}</td><td style="padding:8px 12px;border-bottom:1px solid #e7e7e7;">${htmlEscape(v)}</td></tr>`).join("");
+
+  await brevo("/smtp/email",{
+    method:"POST",
+    body:JSON.stringify({
+      sender:meta.sender,
+      to:[{email:meta.recipient}],
+      replyTo:email?{email,name}:undefined,
+      subject:`New Nigerian Reunion Registration — ${name} — ${label}`,
+      htmlContent:`<div style="font-family:Arial,sans-serif;color:#07150f;max-width:720px;margin:auto">
+        <h2 style="margin-bottom:6px">New Nigerian Reunion submission</h2>
+        <p style="color:#56635d;margin-top:0">${htmlEscape(label)}</p>
+        <table style="width:100%;border-collapse:collapse">${rowHtml}</table>
+      </div>`
+    })
+  });
+}
+
 async function ensureAttributes(){
   if(attributesReady) return;
   const data=await brevo("/contacts/attributes",{method:"GET"});
@@ -220,6 +311,13 @@ const server=http.createServer(async (req,res)=>{
           updateEnabled:true
         })
       });
+
+      try{
+        await sendLeadNotification({leadType,name,email,phone,city,state,region,country,body});
+        console.log("NRW_NOTIFICATION_SENT",leadType,email);
+      }catch(notificationErr){
+        console.error("NRW_NOTIFICATION_FAILED",notificationErr.status||"",notificationErr.details||notificationErr.message);
+      }
 
       return send(res,200,{ok:true,message:"You're on the list."},origin);
     }catch(err){
