@@ -9,7 +9,7 @@ const allowedOrigins = new Set([
 ]);
 
 const attributeNames = [
-  "FULL_NAME","PHONE_RAW","CITY_STATE","COUNTRY","NRW_INTERESTS",
+  "FULL_NAME","PHONE_RAW","CITY_STATE","CITY","STATE","REGION","COUNTRY","NRW_INTERESTS",
   "INVEST_INTERESTS","INVEST_RANGE","TRAVEL_INTERESTS","SOURCE",
   "LEAD_TYPE","ORGANIZATION","ROLE_TITLE","PROFILE_URL","SPEAKER_TOPICS",
   "PROPOSED_TOPIC","AUDIENCE_TAKEAWAY","SPEAKER_BIO","CIVIC_INTERESTS","CIVIC_SUGGESTION"
@@ -111,10 +111,12 @@ const server=http.createServer(async (req,res)=>{
       const email=String(body.email||"").trim().toLowerCase();
       const phone=String(body.phone||"").trim();
       const city=String(body.city||"").trim();
+      const state=String(body.state||"").trim();
+      const region=String(body.region||"").trim();
       const country=String(body.country||"").trim();
       const leadType=String(body.leadType||"general").trim();
 
-      if(!name || !email || !phone || !city || !country){
+      if(!name || !email || !phone || !city || !state || !country){
         return send(res,400,{ok:false,error:"Please complete all required fields."},origin);
       }
       if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
@@ -126,7 +128,10 @@ const server=http.createServer(async (req,res)=>{
       const attributes={
         FULL_NAME:name.slice(0,200),
         PHONE_RAW:phone.slice(0,200),
-        CITY_STATE:city.slice(0,200),
+        CITY_STATE:(state==="OUTSIDE_US" ? [city,region].filter(Boolean).join(", ") : [city,state].filter(Boolean).join(", ")).slice(0,200),
+        CITY:city.slice(0,200),
+        STATE:state.slice(0,200),
+        REGION:region.slice(0,200),
         COUNTRY:country.slice(0,200),
         NRW_INTERESTS:cleanList(body.interests),
         INVEST_INTERESTS:cleanList(body.investmentInterests),
