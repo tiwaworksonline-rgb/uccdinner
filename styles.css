@@ -136,3 +136,13 @@ footer{padding:34px clamp(24px,7vw,110px);display:flex;justify-content:space-bet
 .lead-form textarea:focus,.lead-form input[type="url"]:focus{border-color:rgba(25,167,102,.7);box-shadow:0 0 0 3px rgba(25,167,102,.09)}
 .speaker-shell{background:#fff}
 @media(max-width:900px){.speaker-topics{grid-template-columns:1fr;padding:82px 20px}}
+
+.mobile-nav-toggle{display:none;background:transparent;border:0;padding:8px;cursor:pointer}
+.mobile-nav-toggle span{display:block;width:24px;height:2px;background:#fff;margin:5px 0;border-radius:2px}
+@media(max-width:900px){
+  .mobile-nav-toggle{display:block;order:3}
+  .site-header nav{display:none;position:absolute;top:76px;left:0;right:0;background:#07150f;border-top:1px solid rgba(255,255,255,.08);padding:16px 20px 22px;flex-direction:column;align-items:stretch;gap:4px}
+  .site-header.nav-open nav{display:flex}
+  .site-header nav a,.site-header nav a:not(.nav-cta){display:block;padding:13px 10px;border-bottom:1px solid rgba(255,255,255,.08)}
+  .site-header nav .nav-cta{margin-top:8px;text-align:center;border:1px solid rgba(255,255,255,.45);border-radius:999px}
+}
