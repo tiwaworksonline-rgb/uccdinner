@@ -61,9 +61,15 @@ document.addEventListener("DOMContentLoaded",()=>{
 
       form.reset();
       document.querySelectorAll(".conditional-panel").forEach(p=>p.classList.remove("is-visible"));
-      status.textContent="You’re on the list. Watch your inbox for Nigerian Reunion Weekend updates.";
-      status.classList.add("is-success");
-      submit.innerHTML='You’re on the list ✓';
+      const card=form.closest(".lead-form-card");
+      const progress=card?.querySelector(".form-progress");
+      const success=card?.querySelector("#registration-success");
+      if(progress) progress.hidden=true;
+      form.hidden=true;
+      if(success){
+        success.hidden=false;
+        success.scrollIntoView({behavior:"smooth",block:"center"});
+      }
     }catch(err){
       status.textContent=err.message || "We couldn't save your information. Please try again.";
       status.classList.add("is-error");
