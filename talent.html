@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Artist, DJ, host and performer interest for Nigerian Reunion.">
+<title>Talent Interest | Nigerian Reunion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="index.html" aria-label="Nigerian Reunion home">
+    <span class="brand-mark">NR</span>
+    <span class="brand-text">Nigerian<br>Reunion</span>
+  </a>
+  <nav><a href="weekend.html">Weekend</a><a href="experience.html">Experience</a><a href="speakers.html">Speakers</a><a href="civic.html">Civic</a><a href="investment.html">Invest</a><a href="travel.html">Travel</a><a href="faq.html">FAQ</a><a class="nav-cta" href="join.html">Join the List</a></nav>
+</header>
+
+<main class="inner-main">
+<section class="page-hero compact">
+  <div class="section-kicker light">ARTISTS + DJS + HOSTS</div>
+  <h1>Bring your talent<br>to the reunion.</h1>
+  <p>We’re building a curated talent roster for Nigerian Reunion. Artists, DJs, hosts and performers can submit interest for consideration across select weekend experiences.</p>
+</section>
+
+<section class="join-shell speaker-shell">
+<aside class="join-intro">
+  <div class="section-kicker">TALENT INTEREST</div>
+  <h2>Show us what you bring to the room.</h2>
+  <p>This is an interest form, not a booking guarantee. Our programming team will review submissions as event lineups and opportunities are developed.</p>
+  <div class="join-benefits">
+    <div><strong>01</strong><span>Artists + live performers</span></div>
+    <div><strong>02</strong><span>DJs + selectors</span></div>
+    <div><strong>03</strong><span>Hosts + personalities</span></div>
+    <div><strong>04</strong><span>Specialty performers</span></div>
+  </div>
+  <p class="privacy-note">Booking terms, credentials, travel and compensation, if applicable, will be discussed separately with selected talent.</p>
+</aside>
+
+<div class="lead-form-card">
+<form class="lead-form" id="talent-interest-form">
+  <div class="form-progress"><span>TALENT INTEREST</span><strong>2027</strong></div>
+
+  <div class="form-section">
+    <h3>About you</h3>
+    <div class="field-grid two">
+      <label><span>Full name *</span><input type="text" name="name" required placeholder="Your full name"></label>
+      <label><span>Stage / Artist name</span><input type="text" name="stageName" placeholder="Stage or artist name"></label>
+      <label><span>Email address *</span><input type="email" name="email" required placeholder="you@email.com"></label>
+      <label><span>Phone number *</span><input type="tel" name="phone" required placeholder="(555) 555-5555"></label>
+      <label><span>City *</span><input type="text" name="city" required placeholder="City"></label>
+      <label><span>State *</span><select name="state" required>
+        <option value="">Select state</option>
+        <option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option><option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option><option>District of Columbia</option><option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option><option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option><option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option><option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option><option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option><option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option><option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option><option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option><option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option><option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option><option>Wisconsin</option><option>Wyoming</option>
+        <option value="OUTSIDE_US">Outside U.S. / Province or Region</option>
+      </select></label>
+      <label><span>Country *</span><input type="text" name="country" required placeholder="Country"></label>
+      <label class="region-field" hidden><span>Province / Region *</span><input type="text" name="region" placeholder="Province, state or region"></label>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <h3>Talent type *</h3>
+    <div class="choice-chips">
+      <label><input type="checkbox" name="talent_type" value="artist"><span>Artist / Performer</span></label>
+      <label><input type="checkbox" name="talent_type" value="dj"><span>DJ</span></label>
+      <label><input type="checkbox" name="talent_type" value="host"><span>Host / MC</span></label>
+      <label><input type="checkbox" name="talent_type" value="specialty"><span>Specialty Performer</span></label>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <h3>Links + profile</h3>
+    <div class="field-grid two">
+      <label><span>Website</span><input type="url" name="websiteUrl" placeholder="https://"></label>
+      <label><span>Instagram</span><input type="text" name="instagram" placeholder="@handle or profile URL"></label>
+      <label><span>TikTok</span><input type="text" name="tiktok" placeholder="@handle or profile URL"></label>
+      <label><span>YouTube / SoundCloud / Spotify</span><input type="text" name="performanceUrl" placeholder="Performance or music link"></label>
+    </div>
+    <label><span>Genre / Style</span><input type="text" name="genre" placeholder="Afrobeats, Amapiano, Hip-Hop, Open Format..."></label>
+    <label><span>Approximate audience / following</span><input type="text" name="audienceSize" placeholder="Optional"></label>
+  </div>
+
+  <div class="form-section">
+    <h3>Booking interest</h3>
+    <div class="choice-chips">
+      <label><input type="checkbox" name="booking_interest" value="paid"><span>Paid booking</span></label>
+      <label><input type="checkbox" name="booking_interest" value="promotional"><span>Promotional appearance</span></label>
+      <label><input type="checkbox" name="booking_interest" value="both"><span>Open to both</span></label>
+    </div>
+    <label><span>Short bio *</span><textarea name="bio" rows="5" required placeholder="Tell us about your talent, recent work and performance experience."></textarea></label>
+    <label><span>Why Nigerian Reunion?</span><textarea name="whyReunion" rows="4" placeholder="Why are you interested in being part of this experience?"></textarea></label>
+    <label><span>Management / booking contact</span><input type="text" name="bookingContact" placeholder="Name, email or phone if applicable"></label>
+  </div>
+
+  <label class="legal-consent"><input type="checkbox" name="legal_consent" required><span>I agree to the <a href="terms.html" target="_blank">Terms &amp; Conditions</a> and acknowledge the <a href="privacy.html" target="_blank">Privacy Policy</a>.</span></label>
+  <button class="lead-submit" type="submit">Submit Talent Interest <span>→</span></button>
+  <p class="form-status" id="talent-form-status">Submitting interest does not guarantee a booking or appearance.</p>
+</form>
+</div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-brand">NIGERIAN REUNION</div>
+  <div class="footer-links"><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="conduct.html">Code of Conduct</a><a href="event-policies.html">Event Policies</a></div>
+  <div>© 2027 Nigerian Reunion</div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
