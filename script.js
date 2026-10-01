@@ -138,6 +138,25 @@ document.addEventListener("DOMContentLoaded",()=>{
     investmentInterests:[],travelInterests:[]
   }),"Thanks. Your speaker interest has been submitted for programming review.");
 
+  bindSpecialForm("#investment-interest-form","#investment-form-status",(form)=>{
+    const investmentInterests=[...form.querySelectorAll('input[name="investment_interest"]:checked')].map(i=>i.value);
+    if(investmentInterests.length===0) throw new Error("Choose at least one investment interest.");
+    return {
+      leadType:"investment",
+      name:form.elements.name.value,
+      email:form.elements.email.value,
+      phone:form.elements.phone.value,
+      city:form.elements.city.value,
+      state:form.elements.state ? form.elements.state.value : "",
+      region:form.elements.region ? form.elements.region.value : "",
+      country:form.elements.country.value,
+      interests:["Investment"],
+      investmentInterests,
+      investmentRange:form.elements.investment_range ? form.elements.investment_range.value : "",
+      travelInterests:[]
+    };
+  },"Thanks. You’re on the Nigerian Reunion investment interest list.");
+
   bindSpecialForm("#travel-interest-form","#travel-form-status",(form)=>{
     const travelInterests=[...form.querySelectorAll('input[name="travel_interest"]:checked')].map(i=>i.value);
     if(travelInterests.length===0) throw new Error("Choose at least one travel interest.");
