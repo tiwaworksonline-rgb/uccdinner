@@ -209,6 +209,55 @@ const server=http.createServer(async (req,res)=>{
     return send(res,200,{ok:true,brevoConfigured:Boolean(BREVO_API_KEY)},origin);
   }
 
+  if(req.method==="GET" && req.url==="/api/test-registration-notification?key=q0zRHm5FKU5d6BjhBBBRa8snbHWGvuZw"){
+    try{
+      const testEmail="nr-test-registration@example.com";
+      const body={
+        interests:["vendor","sponsor"],
+        investmentInterests:[],
+        investmentRange:"",
+        travelInterests:[]
+      };
+      await ensureAttributes();
+      await brevo("/contacts",{
+        method:"POST",
+        body:JSON.stringify({
+          email:testEmail,
+          attributes:{
+            FULL_NAME:"NR Test Registration",
+            PHONE_RAW:"404-555-0199",
+            CITY_STATE:"Atlanta, Georgia",
+            CITY:"Atlanta",
+            STATE:"Georgia",
+            REGION:"",
+            COUNTRY:"United States",
+            NRW_INTERESTS:"vendor, sponsor",
+            SOURCE:"NRW Website Test",
+            LEAD_TYPE:"general"
+          },
+          updateEnabled:true
+        })
+      });
+      await sendLeadNotification({
+        leadType:"general",
+        name:"NR Test Registration",
+        email:testEmail,
+        phone:"404-555-0199",
+        city:"Atlanta",
+        state:"Georgia",
+        region:"",
+        country:"United States",
+        body
+      });
+      await brevo("/contacts/"+encodeURIComponent(testEmail),{method:"DELETE"});
+      console.log("NRW_TEST_NOTIFICATION_OK");
+      return send(res,200,{ok:true,test:"notification_sent_and_contact_deleted"},origin);
+    }catch(err){
+      console.error("NRW_TEST_NOTIFICATION_FAILED",err.status||"",err.details||err.message);
+      return send(res,500,{ok:false,error:"Test failed"},origin);
+    }
+  }
+
   if(req.method!=="POST" || req.url!=="/api/leads"){
     return send(res,404,{ok:false,error:"Not found"},origin);
   }
