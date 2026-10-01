@@ -11,7 +11,7 @@ const allowedOrigins = new Set([
 const attributeNames = [
   "FULL_NAME","PHONE_RAW","CITY_STATE","CITY","STATE","REGION","COUNTRY","NRW_INTERESTS",
   "INVEST_INTERESTS","INVEST_RANGE","TRAVEL_INTERESTS","SOURCE",
-  "LEAD_TYPE","ORGANIZATION","ROLE_TITLE","PROFILE_URL","SPEAKER_TOPICS",
+  "LEAD_TYPE","ORGANIZATION","ROLE_TITLE","PROFILE_URL","WEBSITE_URL","INSTAGRAM","LINKEDIN","TIKTOK","SPEAKER_TOPICS",
   "PROPOSED_TOPIC","AUDIENCE_TAKEAWAY","SPEAKER_BIO","CIVIC_INTERESTS","CIVIC_SUGGESTION"
 ];
 
@@ -172,7 +172,11 @@ const server=http.createServer(async (req,res)=>{
         LEAD_TYPE:leadType.slice(0,200),
         ORGANIZATION:String(body.organization||"").slice(0,200),
         ROLE_TITLE:String(body.role||"").slice(0,200),
-        PROFILE_URL:String(body.profileUrl||"").slice(0,200),
+        PROFILE_URL:String(body.linkedin||body.websiteUrl||"").slice(0,200),
+        WEBSITE_URL:String(body.websiteUrl||"").slice(0,200),
+        INSTAGRAM:String(body.instagram||"").slice(0,200),
+        LINKEDIN:String(body.linkedin||"").slice(0,200),
+        TIKTOK:String(body.tiktok||"").slice(0,200),
         SPEAKER_TOPICS:cleanList(body.speakerTopics),
         PROPOSED_TOPIC:String(body.proposedTopic||"").slice(0,200),
         AUDIENCE_TAKEAWAY:String(body.takeaway||"").slice(0,200),
