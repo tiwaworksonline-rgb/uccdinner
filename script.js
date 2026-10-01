@@ -160,3 +160,26 @@ document.addEventListener("DOMContentLoaded",()=>{
     sync();
   });
 });
+
+document.addEventListener("DOMContentLoaded",()=>{
+  const header=document.querySelector(".site-header");
+  const nav=header?.querySelector("nav");
+  if(!header || !nav || header.querySelector(".mobile-nav-toggle")) return;
+  const btn=document.createElement("button");
+  btn.type="button";
+  btn.className="mobile-nav-toggle";
+  btn.setAttribute("aria-label","Open navigation");
+  btn.setAttribute("aria-expanded","false");
+  btn.innerHTML="<span></span><span></span><span></span>";
+  btn.addEventListener("click",()=>{
+    const open=header.classList.toggle("nav-open");
+    btn.setAttribute("aria-expanded",String(open));
+    btn.setAttribute("aria-label",open?"Close navigation":"Open navigation");
+  });
+  nav.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{
+    header.classList.remove("nav-open");
+    btn.setAttribute("aria-expanded","false");
+    btn.setAttribute("aria-label","Open navigation");
+  }));
+  header.appendChild(btn);
+});
