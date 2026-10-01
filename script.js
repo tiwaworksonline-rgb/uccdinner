@@ -129,6 +129,25 @@ document.addEventListener("DOMContentLoaded",()=>{
     investmentInterests:[],travelInterests:[]
   }),"Thanks. Your speaker interest has been submitted for programming review.");
 
+  bindSpecialForm("#travel-interest-form","#travel-form-status",(form)=>{
+    const travelInterests=[...form.querySelectorAll('input[name="travel_interest"]:checked')].map(i=>i.value);
+    if(travelInterests.length===0) throw new Error("Choose at least one travel interest.");
+    return {
+      leadType:"travel",
+      name:form.elements.name.value,
+      email:form.elements.email.value,
+      phone:form.elements.phone.value,
+      city:form.elements.city.value,
+      state:form.elements.state ? form.elements.state.value : "",
+      region:form.elements.region ? form.elements.region.value : "",
+      country:form.elements.country.value,
+      interests:["Travel"],
+      investmentInterests:[],
+      investmentRange:"",
+      travelInterests
+    };
+  },"Thanks. You’re on the Nigerian Reunion travel interest list.");
+
   bindSpecialForm("#civic-interest-form","#civic-form-status",(form)=>({
     leadType:"civic",
     name:form.elements.name.value,
