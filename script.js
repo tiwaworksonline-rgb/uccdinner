@@ -183,3 +183,45 @@ document.addEventListener("DOMContentLoaded",()=>{
   }));
   header.appendChild(btn);
 });
+
+document.addEventListener("DOMContentLoaded",()=>{
+  document.querySelectorAll(".site-footer").forEach(footer=>{
+    let social=footer.querySelector(".social-links");
+    if(!social){
+      social=document.createElement("div");
+      social.className="social-links site-social-links";
+      social.setAttribute("aria-label","Social media");
+      footer.insertBefore(social,footer.lastElementChild);
+    }else{
+      social.classList.add("site-social-links");
+    }
+
+    if(!social.querySelector('[data-social="instagram"]')){
+      const instagram=document.createElement("span");
+      instagram.className="social-icon";
+      instagram.dataset.social="instagram";
+      instagram.title="Instagram";
+      instagram.setAttribute("aria-label","Instagram");
+      instagram.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1"></circle></svg>';
+      social.appendChild(instagram);
+    }
+
+    if(!social.querySelector('[data-social="tiktok"]')){
+      const tiktok=document.createElement("span");
+      tiktok.className="social-icon";
+      tiktok.dataset.social="tiktok";
+      tiktok.title="TikTok";
+      tiktok.setAttribute("aria-label","TikTok");
+      tiktok.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4v10.2a4.2 4.2 0 1 1-3-4v2.8a1.7 1.7 0 1 0 1 1.55V4h2Zm0 0c.7 2.1 2 3.5 4 4v2.8c-1.6-.2-3-.8-4-1.7"></path></svg>';
+      social.appendChild(tiktok);
+    }
+
+    if(!social.querySelector(".revueno-mark")){
+      const revueno=document.createElement("span");
+      revueno.className="revueno-mark";
+      revueno.setAttribute("aria-label","Revueno");
+      revueno.textContent="REVUENO";
+      social.appendChild(revueno);
+    }
+  });
+});
