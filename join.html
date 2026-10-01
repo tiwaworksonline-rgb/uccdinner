@@ -20,12 +20,85 @@
   </header>
 <main class="inner-main">
   <section class="page-hero compact"><div class="section-kicker light">EARLY ACCESS</div><h1>Be first to know.</h1><p>Get ticket releases, schedule updates, VIP information, travel details, artist announcements, vending, sponsorship and creator opportunities.</p></section>
-  <section class="join-panel">
-    <div><div class="section-kicker">JOIN THE LIST</div><h2>Stay connected to the reunion.</h2><p>We’re updating the signup experience so it works directly with the site. We’re building one interest list for reunion tickets, VIP, investment opportunities and curated Nigeria travel.</p></div>
-    <div class="join-fields-preview">
-      <span>Full name</span><span>Email address</span><span>Phone number</span><span>City / State</span><span>Country</span>
-      <span>Nigerian Reunion Weekend tickets</span><span>VIP</span><span>Investment opportunities</span><span>Travel to Nigeria</span>
-      <span>Art Week</span><span>Fashion Week</span><span>Detty December</span><span>Vendor / Sponsor / Media opportunities</span>
+  <section class="join-shell">
+    <aside class="join-intro">
+      <div class="section-kicker">JOIN THE LIST</div>
+      <h2>Tell us what you want in on.</h2>
+      <p>One list. Different lanes. Choose what matters to you and we’ll use it to send the right updates instead of everything to everyone.</p>
+
+      <div class="join-benefits">
+        <div><strong>01</strong><span>Early ticket + VIP announcements</span></div>
+        <div><strong>02</strong><span>Investment + business opportunities</span></div>
+        <div><strong>03</strong><span>Nigeria travel experiences</span></div>
+        <div><strong>04</strong><span>Vendor, sponsor + media opportunities</span></div>
+      </div>
+      <p class="privacy-note">No ticket purchase is required. Joining the list only registers your interest.</p>
+    </aside>
+
+    <div class="lead-form-card">
+      <div class="form-progress"><span>EARLY ACCESS</span><strong>2027</strong></div>
+
+      <form class="lead-form" id="lead-interest-form">
+        <div class="form-section">
+          <h3>About you</h3>
+          <div class="field-grid two">
+            <label><span>Full name *</span><input type="text" name="name" placeholder="Your full name" required></label>
+            <label><span>Email address *</span><input type="email" name="email" placeholder="you@email.com" required></label>
+            <label><span>Phone number *</span><input type="tel" name="phone" placeholder="(555) 555-5555" required></label>
+            <label><span>City / State *</span><input type="text" name="city" placeholder="City, State" required></label>
+          </div>
+          <label><span>Country *</span><input type="text" name="country" placeholder="Country" required></label>
+        </div>
+
+        <div class="form-section">
+          <h3>What are you interested in?</h3>
+          <p class="form-help">Choose as many as you want.</p>
+          <div class="interest-grid">
+            <label class="interest-card"><input type="checkbox" name="interest" value="reunion"><span><b>🎟</b><strong>Reunion Weekend</strong><small>Tickets + weekend announcements</small></span></label>
+            <label class="interest-card"><input type="checkbox" name="interest" value="vip"><span><b>✦</b><strong>VIP</strong><small>Sections, tents + premium access</small></span></label>
+            <label class="interest-card"><input type="checkbox" name="interest" value="investment"><span><b>↗</b><strong>Invest</strong><small>Nigeria investment opportunities</small></span></label>
+            <label class="interest-card"><input type="checkbox" name="interest" value="travel"><span><b>✈</b><strong>Travel</strong><small>Curated trips to Nigeria</small></span></label>
+            <label class="interest-card"><input type="checkbox" name="interest" value="vendor"><span><b>▦</b><strong>Vendor</strong><small>Business + marketplace opportunities</small></span></label>
+            <label class="interest-card"><input type="checkbox" name="interest" value="sponsor"><span><b>◎</b><strong>Sponsor</strong><small>Brand + activation opportunities</small></span></label>
+            <label class="interest-card"><input type="checkbox" name="interest" value="media"><span><b>◉</b><strong>Media / Creator</strong><small>Coverage + content opportunities</small></span></label>
+          </div>
+        </div>
+
+        <div class="form-section conditional-panel" data-show-for="investment">
+          <h3>Investment interests</h3>
+          <div class="choice-chips">
+            <label><input type="checkbox" name="investment_interest" value="real-estate"><span>Real Estate</span></label>
+            <label><input type="checkbox" name="investment_interest" value="business"><span>Business</span></label>
+            <label><input type="checkbox" name="investment_interest" value="hospitality"><span>Hospitality + Nightlife</span></label>
+            <label><input type="checkbox" name="investment_interest" value="media"><span>Entertainment + Media</span></label>
+            <label><input type="checkbox" name="investment_interest" value="technology"><span>Startups + Technology</span></label>
+          </div>
+          <label><span>Potential investment range</span>
+            <select name="investment_range">
+              <option value="">Select a range</option>
+              <option>Just exploring</option>
+              <option>Under $10,000</option>
+              <option>$10,000–$25,000</option>
+              <option>$25,000–$50,000</option>
+              <option>$50,000–$100,000</option>
+              <option>$100,000+</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="form-section conditional-panel" data-show-for="travel">
+          <h3>Travel interests</h3>
+          <div class="choice-chips">
+            <label><input type="checkbox" name="travel_interest" value="art-week"><span>Art Week</span></label>
+            <label><input type="checkbox" name="travel_interest" value="fashion-week"><span>Fashion Week</span></label>
+            <label><input type="checkbox" name="travel_interest" value="detty-december"><span>Detty December</span></label>
+            <label><input type="checkbox" name="travel_interest" value="business-culture"><span>Business + Culture Trips</span></label>
+          </div>
+        </div>
+
+        <button class="lead-submit" type="button">Join the Interest List <span>→</span></button>
+        <p class="form-status">Lead submission is being connected. The new form design is ready.</p>
+      </form>
     </div>
   </section>
 </main><footer>
