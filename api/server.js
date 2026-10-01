@@ -154,7 +154,7 @@ async function sendLeadNotification({leadType,name,email,phone,city,state,region
 
   const rowHtml=rows.map(([k,v])=>`<tr><td style="padding:8px 12px;border-bottom:1px solid #e7e7e7;font-weight:700;vertical-align:top;">${htmlEscape(k)}</td><td style="padding:8px 12px;border-bottom:1px solid #e7e7e7;">${htmlEscape(v)}</td></tr>`).join("");
 
-  await brevo("/smtp/email",{
+  const sendResult=await brevo("/smtp/email",{
     method:"POST",
     body:JSON.stringify({
       sender:meta.sender,
@@ -168,6 +168,8 @@ async function sendLeadNotification({leadType,name,email,phone,city,state,region
       </div>`
     })
   });
+  console.log("NRW_NOTIFICATION_BREVO_ACCEPTED",sendResult.messageId||sendResult.messageIds||"no-message-id",meta.sender.email,meta.recipient);
+  return sendResult;
 }
 
 async function ensureAttributes(){
@@ -192,6 +194,20 @@ async function ensureAttributes(){
 function cleanList(v){
   if(!Array.isArray(v)) return "";
   return v.map(x=>String(x).trim()).filter(Boolean).join(", ").slice(0,200);
+}
+
+function generalInterestListNames(interests){
+  const map={
+    reunion:"Nigerian Reunion Weekend",
+    vip:"Nigerian Reunion VIP",
+    investment:"Nigerian Reunion Investment Interest",
+    travel:"Nigerian Reunion Travel Interest",
+    vendor:"Nigerian Reunion Vendors",
+    sponsor:"Nigerian Reunion Sponsors",
+    media:"Nigerian Reunion Media + Creators"
+  };
+  const values=Array.isArray(interests)?interests:[];
+  return [...new Set(values.map(v=>map[String(v).trim()]).filter(Boolean))];
 }
 
 const server=http.createServer(async (req,res)=>{
@@ -300,8 +316,16 @@ const server=http.createServer(async (req,res)=>{
         listIds=[await ensureBrevoList("Nigerian Reunion Talent Interest")];
       } else if(leadType==="inquiry"){
         listIds=[await ensureBrevoList("Nigerian Reunion General Inquiries")];
+      } else if(leadType==="speaker"){
+        listIds=[await ensureBrevoList("Nigerian Reunion Speakers")];
+      } else if(leadType==="civic"){
+        listIds=[await ensureBrevoList("Nigerian Reunion Civic Interest")];
+      } else {
+        const names=["Nigerian Reunion Early Access",...generalInterestListNames(body.interests)];
+        listIds=await Promise.all(names.map(ensureBrevoList));
       }
 
+      console.log("NRW_LISTS_ASSIGNED",leadType,listIds.join(","));
       await brevo("/contacts",{
         method:"POST",
         body:JSON.stringify({
