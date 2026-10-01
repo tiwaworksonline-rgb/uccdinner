@@ -121,6 +121,33 @@ function leadLabel(leadType,body){
   return interests.length?interests.join(" + "):"General Registration";
 }
 
+async function sendRegistrantConfirmation({leadType,name,email,body}){
+  if(!email) return;
+  const meta=await getNotificationMeta();
+  const label=leadLabel(leadType,body);
+  const firstName=String(name||"").trim().split(/\s+/)[0]||"there";
+  const interests=cleanList(body.interests);
+  const details=interests ? `<p style="margin:18px 0 0"><strong>Your selected interests:</strong> ${htmlEscape(interests)}</p>` : "";
+  const result=await brevo("/smtp/email",{
+    method:"POST",
+    body:JSON.stringify({
+      sender:meta.sender,
+      to:[{email,name}],
+      subject:"You’re on the Nigerian Reunion list",
+      htmlContent:`<div style="font-family:Arial,sans-serif;color:#07150f;max-width:650px;margin:auto;padding:24px">
+        <div style="font-size:12px;font-weight:700;letter-spacing:.14em;color:#13895a">NIGERIAN REUNION</div>
+        <h1 style="font-size:40px;line-height:1.05;margin:16px 0">You’re on the list.</h1>
+        <p style="font-size:18px;line-height:1.6">Hi ${htmlEscape(firstName)}, your registration has been received. You’re registered for Nigerian Reunion updates.</p>
+        ${details}
+        <p style="font-size:16px;line-height:1.6;color:#56635d">Watch your inbox for ticket releases, schedule announcements and the opportunities you selected.</p>
+        <p style="font-size:13px;color:#7a8580;margin-top:28px">Submission type: ${htmlEscape(label)}</p>
+      </div>`
+    })
+  });
+  console.log("NRW_CONFIRMATION_BREVO_ACCEPTED",result.messageId||result.messageIds||"no-message-id",email);
+  return result;
+}
+
 async function sendLeadNotification({leadType,name,email,phone,city,state,region,country,body}){
   const meta=await getNotificationMeta();
   const label=leadLabel(leadType,body);
@@ -194,6 +221,24 @@ async function ensureAttributes(){
 function cleanList(v){
   if(!Array.isArray(v)) return "";
   return v.map(x=>String(x).trim()).filter(Boolean).join(", ").slice(0,200);
+}
+
+async function ensureListsSequential(names){
+  const ids=[];
+  for(const name of names){
+    try{
+      ids.push(await ensureBrevoList(name));
+    }catch(err){
+      if(err.status===429){
+        await new Promise(r=>setTimeout(r,900));
+        ids.push(await ensureBrevoList(name));
+      }else{
+        throw err;
+      }
+    }
+    await new Promise(r=>setTimeout(r,180));
+  }
+  return ids;
 }
 
 function generalInterestListNames(interests){
@@ -322,7 +367,7 @@ const server=http.createServer(async (req,res)=>{
         listIds=[await ensureBrevoList("Nigerian Reunion Civic Interest")];
       } else {
         const names=["Nigerian Reunion Early Access",...generalInterestListNames(body.interests)];
-        listIds=await Promise.all(names.map(ensureBrevoList));
+        listIds=await ensureListsSequential(names);
       }
 
       console.log("NRW_LISTS_ASSIGNED",leadType,listIds.join(","));
@@ -335,6 +380,12 @@ const server=http.createServer(async (req,res)=>{
           updateEnabled:true
         })
       });
+
+      try{
+        await sendRegistrantConfirmation({leadType,name,email,body});
+      }catch(confirmErr){
+        console.error("NRW_CONFIRMATION_FAILED",confirmErr.status||"",confirmErr.details||confirmErr.message);
+      }
 
       try{
         await sendLeadNotification({leadType,name,email,phone,city,state,region,country,body});
@@ -374,8 +425,8 @@ server.listen(PORT,async()=>{
       "Nigerian Reunion Civic Interest",
       "Nigerian Reunion General Inquiries"
     ];
-    await Promise.all(startupLists.map(ensureBrevoList));
-    console.log("NRW_LISTS_READY",startupLists.length);
+    const startupIds=await ensureListsSequential(startupLists);
+    console.log("NRW_LISTS_READY",startupIds.length);
   }catch(err){
     console.error("BREVO_CONNECTION_FAILED",err.status||"",err.details?.message||err.message);
   }
