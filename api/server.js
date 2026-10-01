@@ -171,13 +171,6 @@ server.listen(PORT,async()=>{
   try{
     await brevo("/account",{method:"GET"});
     console.log("BREVO_CONNECTION_OK");
-    const testEmail="nrw-integration-test@example.com";
-    await brevo("/contacts",{
-      method:"POST",
-      body:JSON.stringify({email:testEmail,updateEnabled:true})
-    });
-    await brevo("/contacts/"+encodeURIComponent(testEmail),{method:"DELETE"});
-    console.log("BREVO_CONTACT_TEST_OK");
   }catch(err){
     console.error("BREVO_CONNECTION_FAILED",err.status||"",err.details?.message||err.message);
   }
