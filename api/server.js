@@ -16,6 +16,37 @@ const attributeNames = [
 ];
 
 let attributesReady = false;
+const listCache = new Map();
+
+async function ensureBrevoList(listName){
+  if(listCache.has(listName)) return listCache.get(listName);
+
+  const listsData=await brevo("/contacts/lists?limit=50&offset=0",{method:"GET"});
+  const existingList=(listsData.lists||[]).find(l=>l.name===listName);
+  if(existingList){
+    listCache.set(listName,existingList.id);
+    return existingList.id;
+  }
+
+  const folderName="Nigerian Reunion";
+  const foldersData=await brevo("/contacts/folders?limit=50&offset=0",{method:"GET"});
+  let folder=(foldersData.folders||[]).find(f=>f.name===folderName);
+  let folderId=folder?.id;
+  if(!folderId){
+    const createdFolder=await brevo("/contacts/folders",{
+      method:"POST",
+      body:JSON.stringify({name:folderName})
+    });
+    folderId=createdFolder.id;
+  }
+
+  const createdList=await brevo("/contacts/lists",{
+    method:"POST",
+    body:JSON.stringify({name:listName,folderId})
+  });
+  listCache.set(listName,createdList.id);
+  return createdList.id;
+}
 
 function send(res,status,payload,origin){
   if(origin && allowedOrigins.has(origin)) res.setHeader("Access-Control-Allow-Origin",origin);
@@ -150,11 +181,17 @@ const server=http.createServer(async (req,res)=>{
         CIVIC_SUGGESTION:String(body.topicSuggestion||"").slice(0,200)
       };
 
+      let listIds=[];
+      if(leadType==="travel"){
+        listIds=[await ensureBrevoList("Nigerian Reunion Travel Interest")];
+      }
+
       await brevo("/contacts",{
         method:"POST",
         body:JSON.stringify({
           email,
           attributes,
+          listIds,
           updateEnabled:true
         })
       });
