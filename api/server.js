@@ -149,4 +149,16 @@ const server=http.createServer(async (req,res)=>{
   });
 });
 
-server.listen(PORT,()=>console.log("NRW Brevo lead API listening on",PORT));
+server.listen(PORT,async()=>{
+  console.log("NRW Brevo lead API listening on",PORT);
+  if(!BREVO_API_KEY){
+    console.error("BREVO_CONNECTION_MISSING");
+    return;
+  }
+  try{
+    await brevo("/account",{method:"GET"});
+    console.log("BREVO_CONNECTION_OK");
+  }catch(err){
+    console.error("BREVO_CONNECTION_FAILED",err.status||"",err.details?.message||err.message);
+  }
+});
