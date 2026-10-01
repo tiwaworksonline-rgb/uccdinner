@@ -36,3 +36,23 @@ footer{padding:34px clamp(24px,7vw,110px);display:flex;justify-content:space-bet
 .faq-list details[open] summary:after{content:"–"}
 .faq-list p{font-size:17px;line-height:1.65;color:#4f5d56;max-width:760px;margin:16px 0 0}
 @media (max-width:900px){.faq-grid{grid-template-columns:1fr;gap:34px}.faq{padding:82px 20px}}
+
+.inner-main{padding-top:76px}
+.page-hero{padding:110px clamp(24px,7vw,110px) 90px;background:linear-gradient(135deg,#07150f 0%,#0c2419 65%,#0f3423 100%);color:#fff}
+.page-hero.compact{padding-bottom:72px}
+.page-hero h1{margin:0;font:800 clamp(54px,8vw,110px)/.9 "Manrope",sans-serif;letter-spacing:-.06em;text-transform:uppercase;max-width:980px}
+.page-hero p{max-width:780px;font-size:20px;line-height:1.65;color:rgba(255,255,255,.72);margin:28px 0 0}
+.page-links{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:30px clamp(24px,7vw,110px) 110px;background:var(--cream)}
+.page-link-card{display:block;text-decoration:none;border:1px solid var(--line);background:#fff;border-radius:24px;padding:30px;min-height:290px;transition:transform .2s ease,border-color .2s ease}
+.page-link-card:hover{transform:translateY(-4px);border-color:rgba(25,167,102,.45)}
+.page-link-card>span{font-weight:800;color:var(--green)}
+.page-link-card h3{font:800 30px/1.05 "Manrope";letter-spacing:-.04em;margin:54px 0 12px}
+.page-link-card p{color:var(--muted);line-height:1.6;margin-bottom:26px}
+.page-link-card strong{font-size:14px;color:var(--green)}
+.faq.standalone{padding-top:90px}
+.join-panel{display:grid;grid-template-columns:1fr 1fr;gap:70px;padding:100px clamp(24px,7vw,110px);background:var(--cream)}
+.join-panel h2{font:800 clamp(40px,5vw,68px)/.95 "Manrope";letter-spacing:-.05em;margin:0 0 22px}
+.join-panel p{font-size:18px;line-height:1.7;color:#45524c}
+.join-fields-preview{display:grid;gap:12px;align-content:start}
+.join-fields-preview span{display:block;padding:18px 20px;border:1px solid var(--line);border-radius:14px;background:#fff;color:#65736d}
+@media (max-width:900px){.page-links,.join-panel{grid-template-columns:1fr}.page-links{padding-bottom:82px}.page-hero{padding:90px 20px 70px}.page-hero h1{font-size:56px}.join-panel{padding:82px 20px}}
