@@ -146,3 +146,11 @@ footer{padding:34px clamp(24px,7vw,110px);display:flex;justify-content:space-bet
   .site-header nav a,.site-header nav a:not(.nav-cta){display:block;padding:13px 10px;border-bottom:1px solid rgba(255,255,255,.08)}
   .site-header nav .nav-cta{margin-top:8px;text-align:center;border:1px solid rgba(255,255,255,.45);border-radius:999px}
 }
+
+.site-social-links{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.site-social-links .social-icon{width:36px;height:36px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--ink)}
+.site-social-links .social-icon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.site-social-links .social-icon:hover{border-color:rgba(25,167,102,.45);color:var(--green)}
+.revueno-mark{height:36px;display:inline-flex;align-items:center;padding:0 13px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--ink);font:800 11px/1 "Manrope",sans-serif;letter-spacing:.12em}
+.revueno-mark:before{content:"R";width:20px;height:20px;margin-right:7px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:#fff;font-size:9px;letter-spacing:0}
+@media(max-width:700px){.site-social-links{margin-top:4px}}
