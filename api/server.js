@@ -370,6 +370,8 @@ const server=http.createServer(async (req,res)=>{
       let listIds=[];
       if(leadType==="travel"){
         listIds=[await ensureBrevoList("Nigerian Reunion Travel Interest")];
+      } else if(leadType==="investment"){
+        listIds=[await ensureBrevoList("Nigerian Reunion Investment Interest")];
       } else if(leadType==="talent"){
         listIds=[await ensureBrevoList("Nigerian Reunion Talent Interest")];
       } else if(leadType==="inquiry"){
