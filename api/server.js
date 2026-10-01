@@ -12,7 +12,8 @@ const attributeNames = [
   "FULL_NAME","PHONE_RAW","CITY_STATE","CITY","STATE","REGION","COUNTRY","NRW_INTERESTS",
   "INVEST_INTERESTS","INVEST_RANGE","TRAVEL_INTERESTS","SOURCE",
   "LEAD_TYPE","ORGANIZATION","ROLE_TITLE","PROFILE_URL","WEBSITE_URL","INSTAGRAM","LINKEDIN","TIKTOK","SPEAKER_TOPICS",
-  "PROPOSED_TOPIC","AUDIENCE_TAKEAWAY","SPEAKER_BIO","CIVIC_INTERESTS","CIVIC_SUGGESTION"
+  "PROPOSED_TOPIC","AUDIENCE_TAKEAWAY","SPEAKER_BIO","CIVIC_INTERESTS","CIVIC_SUGGESTION",
+  "STAGE_NAME","TALENT_TYPES","PERFORMANCE_URL","GENRE_STYLE","AUDIENCE_SIZE","BOOKING_INTEREST","WHY_REUNION","BOOKING_CONTACT"
 ];
 
 let attributesReady = false;
@@ -182,12 +183,22 @@ const server=http.createServer(async (req,res)=>{
         AUDIENCE_TAKEAWAY:String(body.takeaway||"").slice(0,200),
         SPEAKER_BIO:String(body.bio||"").slice(0,200),
         CIVIC_INTERESTS:cleanList(body.civicInterests),
-        CIVIC_SUGGESTION:String(body.topicSuggestion||"").slice(0,200)
+        CIVIC_SUGGESTION:String(body.topicSuggestion||"").slice(0,200),
+        STAGE_NAME:String(body.stageName||"").slice(0,200),
+        TALENT_TYPES:cleanList(body.talentTypes),
+        PERFORMANCE_URL:String(body.performanceUrl||"").slice(0,200),
+        GENRE_STYLE:String(body.genre||"").slice(0,200),
+        AUDIENCE_SIZE:String(body.audienceSize||"").slice(0,200),
+        BOOKING_INTEREST:cleanList(body.bookingInterest),
+        WHY_REUNION:String(body.whyReunion||"").slice(0,500),
+        BOOKING_CONTACT:String(body.bookingContact||"").slice(0,200)
       };
 
       let listIds=[];
       if(leadType==="travel"){
         listIds=[await ensureBrevoList("Nigerian Reunion Travel Interest")];
+      } else if(leadType==="talent"){
+        listIds=[await ensureBrevoList("Nigerian Reunion Talent Interest")];
       }
 
       await brevo("/contacts",{
