@@ -277,3 +277,18 @@ document.addEventListener("DOMContentLoaded",()=>{
     }
   });
 });
+
+document.addEventListener("DOMContentLoaded",()=>{
+  const form=document.querySelector("#lead-interest-form");
+  if(!form) return;
+  const params=new URLSearchParams(window.location.search);
+  const interest=params.get("interest");
+  if(!interest) return;
+  const checkbox=form.querySelector('input[name="interest"][value="'+interest+'"]');
+  if(checkbox){
+    checkbox.checked=true;
+    checkbox.dispatchEvent(new Event("change",{bubbles:true}));
+    const card=checkbox.closest(".interest-card");
+    if(card) card.scrollIntoView({behavior:"smooth",block:"center"});
+  }
+});
