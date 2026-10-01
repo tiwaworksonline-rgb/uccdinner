@@ -24,3 +24,15 @@ a{color:inherit}.site-header{position:fixed;top:0;left:0;right:0;z-index:50;heig
 footer{padding:34px clamp(24px,7vw,110px);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:12px;color:#65736d;border-top:1px solid var(--line)}.footer-brand{font-weight:800;color:var(--ink)}
 @media (max-width:900px){.site-header nav a:not(.nav-cta){display:none}.hero{min-height:760px}.hero-stamp{display:none}.manifesto-grid,.section-heading,.signup{grid-template-columns:1fr;gap:34px}.schedule-grid{display:block}.day-card{margin-bottom:14px;min-height:300px}.numbers{grid-template-columns:repeat(2,1fr)}.audience-grid{grid-template-columns:1fr}.signup-actions{text-align:left}}
 @media (max-width:560px){.brand-text{display:none}.hero h1{font-size:58px}.hero-date{font-size:36px}.hero{padding-left:20px;padding-right:20px}.manifesto,.weekend,.audience{padding:82px 20px}.numbers{grid-template-columns:1fr 1fr}.signup{margin:0 12px 30px}.number-card strong{font-size:44px}}
+
+.faq{padding:110px clamp(24px,7vw,110px);background:var(--cream)}
+.faq-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px;align-items:start}
+.faq h2{font:800 clamp(44px,6vw,82px)/.95 "Manrope",sans-serif;letter-spacing:-.055em;margin:0}
+.faq-list details{border-top:1px solid var(--line);padding:24px 0}
+.faq-list details:last-child{border-bottom:1px solid var(--line)}
+.faq-list summary{cursor:pointer;list-style:none;font:800 24px/1.25 "Manrope",sans-serif;letter-spacing:-.025em;position:relative;padding-right:34px}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary:after{content:"+";position:absolute;right:0;top:-2px;font-size:30px;font-weight:500}
+.faq-list details[open] summary:after{content:"–"}
+.faq-list p{font-size:17px;line-height:1.65;color:#4f5d56;max-width:760px;margin:16px 0 0}
+@media (max-width:900px){.faq-grid{grid-template-columns:1fr;gap:34px}.faq{padding:82px 20px}}
