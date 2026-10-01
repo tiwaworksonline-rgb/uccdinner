@@ -181,6 +181,22 @@ document.addEventListener("DOMContentLoaded",()=>{
     };
   },"Thanks. Your talent interest has been submitted for programming review.");
 
+  bindSpecialForm("#faq-contact-form","#faq-contact-status",(form)=>({
+    leadType:"inquiry",
+    name:form.elements.name.value,
+    email:form.elements.email.value,
+    phone:form.elements.phone.value,
+    subject:form.elements.subject.value,
+    message:form.elements.message.value,
+    city:"",
+    state:"",
+    region:"",
+    country:"",
+    interests:["General Inquiry"],
+    investmentInterests:[],
+    travelInterests:[]
+  }),"Thanks. Your inquiry has been sent to the Nigerian Reunion team.");
+
   bindSpecialForm("#civic-interest-form","#civic-form-status",(form)=>({
     leadType:"civic",
     name:form.elements.name.value,
