@@ -134,13 +134,26 @@ async function sendRegistrantConfirmation({leadType,name,email,body}){
       sender:meta.sender,
       to:[{email,name}],
       subject:"You’re on the Nigerian Reunion list",
-      htmlContent:`<div style="font-family:Arial,sans-serif;color:#07150f;max-width:650px;margin:auto;padding:24px">
-        <div style="font-size:12px;font-weight:700;letter-spacing:.14em;color:#13895a">NIGERIAN REUNION</div>
-        <h1 style="font-size:40px;line-height:1.05;margin:16px 0">You’re on the list.</h1>
-        <p style="font-size:18px;line-height:1.6">Hi ${htmlEscape(firstName)}, your registration has been received. You’re registered for Nigerian Reunion updates.</p>
+      htmlContent:`<div style="font-family:Arial,sans-serif;color:#07150f;max-width:680px;margin:auto;padding:28px">
+        <div style="font-size:12px;font-weight:700;letter-spacing:.16em;color:#13895a">NIGERIAN REUNION</div>
+        <h1 style="font-size:42px;line-height:1.05;margin:16px 0 10px">You’re on the list.</h1>
+        <p style="font-size:19px;line-height:1.6;margin:0 0 18px">Hi ${htmlEscape(firstName)}, your registration has been received and you’re officially registered for Nigerian Reunion updates.</p>
+
+        <div style="background:#f4f8f5;border:1px solid #dfe9e2;border-radius:14px;padding:18px 20px;margin:22px 0">
+          <div style="font-size:12px;font-weight:700;letter-spacing:.12em;color:#13895a;margin-bottom:8px">WHAT HAPPENS NEXT</div>
+          <p style="font-size:16px;line-height:1.6;margin:0">We’ll keep you updated on ticket releases, schedule announcements, VIP experiences, travel opportunities, talent and programming news, and the specific opportunities you selected.</p>
+        </div>
+
         ${details}
-        <p style="font-size:16px;line-height:1.6;color:#56635d">Watch your inbox for ticket releases, schedule announcements and the opportunities you selected.</p>
-        <p style="font-size:13px;color:#7a8580;margin-top:28px">Submission type: ${htmlEscape(label)}</p>
+
+        <div style="margin:28px 0 0">
+          <h2 style="font-size:22px;line-height:1.2;margin:0 0 10px">Stay connected.</h2>
+          <p style="font-size:16px;line-height:1.6;color:#56635d;margin:0 0 18px">Keep an eye on your inbox and check the Nigerian Reunion website for new announcements, registration openings and updates as they are released.</p>
+          <a href="https://nigerian-reunion-weekend-atlanta.onrender.com" style="display:inline-block;background:#07150f;color:#ffffff;text-decoration:none;font-weight:700;padding:13px 20px;border-radius:999px">Visit Nigerian Reunion</a>
+        </div>
+
+        <p style="font-size:14px;line-height:1.6;color:#7a8580;margin-top:30px">Thanks for being part of the community. We look forward to keeping you connected as Nigerian Reunion 2027 comes together.</p>
+        <p style="font-size:12px;color:#8a9490;margin-top:18px">Registration type: ${htmlEscape(label)}</p>
       </div>`
     })
   });
