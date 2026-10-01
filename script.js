@@ -35,6 +35,8 @@ document.addEventListener("DOMContentLoaded",()=>{
       email:form.elements.email.value,
       phone:form.elements.phone.value,
       city:form.elements.city.value,
+      state:form.elements.state ? form.elements.state.value : "",
+      region:form.elements.region ? form.elements.region.value : "",
       country:form.elements.country.value,
       website:form.elements.website ? form.elements.website.value : "",
       interests,
@@ -113,6 +115,8 @@ document.addEventListener("DOMContentLoaded",()=>{
     email:form.elements.email.value,
     phone:form.elements.phone.value,
     city:form.elements.city.value,
+    state:form.elements.state ? form.elements.state.value : "",
+    region:form.elements.region ? form.elements.region.value : "",
     country:form.elements.country.value,
     organization:form.elements.organization.value,
     role:form.elements.role.value,
@@ -131,10 +135,28 @@ document.addEventListener("DOMContentLoaded",()=>{
     email:form.elements.email.value,
     phone:form.elements.phone.value,
     city:form.elements.city.value,
+    state:form.elements.state ? form.elements.state.value : "",
+    region:form.elements.region ? form.elements.region.value : "",
     country:form.elements.country.value,
     civicInterests:[...form.querySelectorAll('input[name="civic_interest"]:checked')].map(i=>i.value),
     topicSuggestion:form.elements.topicSuggestion.value,
     interests:["Civic Engagement + Governance"],
     investmentInterests:[],travelInterests:[]
   }),"Thanks. You’re on the civic engagement update list.");
+});
+
+document.addEventListener("DOMContentLoaded",()=>{
+  document.querySelectorAll('select[name="state"]').forEach(select=>{
+    const form=select.closest("form");
+    const regionField=form?.querySelector(".region-field");
+    const regionInput=regionField?.querySelector('input[name="region"]');
+    const sync=()=>{
+      const outside=select.value==="OUTSIDE_US";
+      if(regionField) regionField.hidden=!outside;
+      if(regionInput) regionInput.required=outside;
+      if(!outside && regionInput) regionInput.value="";
+    };
+    select.addEventListener("change",sync);
+    sync();
+  });
 });
