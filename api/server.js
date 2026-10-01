@@ -360,6 +360,22 @@ server.listen(PORT,async()=>{
   try{
     await brevo("/account",{method:"GET"});
     console.log("BREVO_CONNECTION_OK");
+    const startupLists=[
+      "Nigerian Reunion Early Access",
+      "Nigerian Reunion Weekend",
+      "Nigerian Reunion VIP",
+      "Nigerian Reunion Investment Interest",
+      "Nigerian Reunion Travel Interest",
+      "Nigerian Reunion Vendors",
+      "Nigerian Reunion Sponsors",
+      "Nigerian Reunion Media + Creators",
+      "Nigerian Reunion Speakers",
+      "Nigerian Reunion Talent Interest",
+      "Nigerian Reunion Civic Interest",
+      "Nigerian Reunion General Inquiries"
+    ];
+    await Promise.all(startupLists.map(ensureBrevoList));
+    console.log("NRW_LISTS_READY",startupLists.length);
   }catch(err){
     console.error("BREVO_CONNECTION_FAILED",err.status||"",err.details?.message||err.message);
   }
