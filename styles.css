@@ -112,3 +112,17 @@ footer{padding:34px clamp(24px,7vw,110px);display:flex;justify-content:space-bet
 .lead-submit:disabled{opacity:.72;cursor:wait}
 .form-status.is-success{color:#0f7a4c;font-weight:700}
 .form-status.is-error{color:#a42d2d;font-weight:700}
+
+.site-footer{align-items:center}
+.footer-links{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.footer-links a{color:#65736d;text-decoration:none}
+.footer-links a:hover{color:var(--green)}
+.policy-main{background:var(--paper)}
+.policy-wrap{max-width:920px;margin:0 auto;padding:80px 24px 110px}
+.policy-wrap h2{font:800 28px/1.15 "Manrope",sans-serif;letter-spacing:-.03em;margin:44px 0 12px}
+.policy-wrap h2:first-child{margin-top:0}
+.policy-wrap p{font-size:17px;line-height:1.75;color:#4f5d56}
+.legal-consent{display:flex!important;gap:10px;align-items:flex-start;margin-top:24px;font-size:13px!important;line-height:1.5;color:#5e6b65}
+.legal-consent input{margin-top:3px}
+.legal-consent a{color:var(--green);font-weight:700}
+@media(max-width:700px){.site-footer{flex-direction:column;align-items:flex-start}.footer-links{justify-content:flex-start}.policy-wrap{padding:64px 20px 90px}}
