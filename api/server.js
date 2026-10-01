@@ -89,7 +89,7 @@ async function getNotificationMeta(){
     brevo("/senders",{method:"GET"})
   ]);
 
-  const recipient=String(account.email||"").trim();
+  const recipient=String(process.env.NR_NOTIFY_EMAIL||account.email||"").trim();
   const senders=Array.isArray(sendersData.senders)?sendersData.senders:[];
   const sender=senders.find(s=>s.active!==false && s.email) || senders.find(s=>s.email);
 
