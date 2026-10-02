@@ -1,3 +1,44 @@
+const NR_GA4_MEASUREMENT_ID=""; // Add the live GA4 ID, e.g. G-XXXXXXXXXX
+
+window.nrTrack=(eventName,params={})=>{
+  if(typeof window.gtag==="function"){
+    window.gtag(eventName,params);
+  }
+};
+
+if(/^G-[A-Z0-9]+$/i.test(NR_GA4_MEASUREMENT_ID)){
+  window.dataLayer=window.dataLayer||[];
+  window.gtag=function(){window.dataLayer.push(arguments);};
+  window.gtag("js",new Date());
+  window.gtag("config",NR_GA4_MEASUREMENT_ID,{
+    send_page_view:true,
+    anonymize_ip:true
+  });
+
+  const ga=document.createElement("script");
+  ga.async=true;
+  ga.src="https://www.googletagmanager.com/gtag/js?id="+encodeURIComponent(NR_GA4_MEASUREMENT_ID);
+  document.head.appendChild(ga);
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+  document.querySelectorAll("a").forEach(link=>{
+    const href=link.getAttribute("href")||"";
+    const trackable=
+      link.classList.contains("button") ||
+      link.classList.contains("nav-cta") ||
+      /(?:join|travel|investment|talent|speakers)\.html/i.test(href);
+    if(!trackable) return;
+    link.addEventListener("click",()=>{
+      window.nrTrack("cta_click",{
+        link_text:(link.textContent||"").trim().slice(0,100),
+        link_url:href.slice(0,250),
+        page_path:window.location.pathname
+      });
+    });
+  });
+});
+
 document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener("click",e=>{const id=a.getAttribute("href");if(id==="#"||!document.querySelector(id))return;e.preventDefault();document.querySelector(id).scrollIntoView({behavior:"smooth"});}));
 document.addEventListener("DOMContentLoaded",()=>{
   const form=document.querySelector("#lead-interest-form");
@@ -59,6 +100,12 @@ document.addEventListener("DOMContentLoaded",()=>{
       const data=await response.json().catch(()=>({}));
       if(!response.ok) throw new Error(data.error || "Submission failed");
 
+      window.nrTrack("generate_lead",{
+        lead_type:"general",
+        interests:interests.join(",").slice(0,200),
+        page_path:window.location.pathname
+      });
+
       form.reset();
       document.querySelectorAll(".conditional-panel").forEach(p=>p.classList.remove("is-visible"));
       const card=form.closest(".lead-form-card");
@@ -102,6 +149,10 @@ document.addEventListener("DOMContentLoaded",()=>{
         });
         const data=await response.json().catch(()=>({}));
         if(!response.ok) throw new Error(data.error || "Submission failed");
+        window.nrTrack("generate_lead",{
+          lead_type:String(payload.leadType||"special").slice(0,50),
+          page_path:window.location.pathname
+        });
         form.reset();
         status.textContent=successMessage;
         status.classList.add("is-success");
