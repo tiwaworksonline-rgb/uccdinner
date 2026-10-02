@@ -1,4 +1,4 @@
-const NR_GA4_MEASUREMENT_ID=""; // Add the live GA4 ID, e.g. G-XXXXXXXXXX
+const NR_GA4_MEASUREMENT_ID="G-6GFD4GM9YN";
 
 window.nrTrack=(eventName,params={})=>{
   if(typeof window.gtag==="function"){
