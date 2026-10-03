@@ -232,7 +232,7 @@ linear-gradient(135deg,#07150f 0%,#0b2419 65%,#0d3322 100%);color:#fff;display:f
 .nigeria-hero{position:relative;overflow:hidden;min-height:690px;padding:125px clamp(24px,7vw,110px) 90px;background:radial-gradient(circle at 78% 27%,rgba(184,246,66,.12),transparent 24%),radial-gradient(circle at 68% 52%,rgba(25,167,102,.34),transparent 30%),linear-gradient(135deg,#07150f 0%,#0a2117 62%,#0d3825 100%);color:#fff;display:flex;align-items:flex-end}
 .nigeria-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:62px 62px;mask-image:linear-gradient(to bottom,#000,transparent 96%)}
 .nigeria-hero-copy{position:relative;z-index:2;max-width:1000px}.nigeria-hero .section-kicker{color:var(--lime)}
-.nigeria-hero h1{font:800 clamp(54px,8vw,112px)/.86 "Manrope",sans-serif;letter-spacing:-.06em;text-transform:uppercase;margin:0;max-width:1050px}
+.nigeria-hero h1{font:800 clamp(46px,6.8vw,92px)/.9 "Manrope",sans-serif;letter-spacing:-.055em;text-transform:uppercase;margin:0;max-width:980px}
 .nigeria-hero p{max-width:820px;font-size:20px;line-height:1.65;color:rgba(255,255,255,.76);margin:30px 0 0}
 .nigeria-hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
 .nigeria-stamp{position:absolute;right:7vw;top:145px;width:154px;height:154px;border:1px solid rgba(255,255,255,.24);border-radius:50%;display:grid;place-items:center;transform:rotate(7deg);z-index:2}
@@ -289,7 +289,7 @@ linear-gradient(135deg,#07150f 0%,#0b2419 65%,#0d3322 100%);color:#fff;display:f
 .nigeria-lens-grid{grid-template-columns:1fr 1fr}.nigeria-experience-band,.nigeria-moments,.nigeria-sectors,.nigeria-diaspora,.nigeria-bottom-cta{padding-left:20px;padding-right:20px}
 .nigeria-moment-list{grid-template-columns:1fr 1fr}.nigeria-sectors-heading{grid-row:auto}.nigeria-bottom-actions{justify-content:flex-start}
 }
-@media(max-width:560px){.nigeria-hero h1{font-size:48px}.nigeria-lens-grid,.nigeria-moment-list{grid-template-columns:1fr}.nigeria-path-card{min-height:auto}.nigeria-path-card h3{margin-top:52px}}
+@media(max-width:560px){.nigeria-hero h1{font-size:42px}.nigeria-lens-grid,.nigeria-moment-list{grid-template-columns:1fr}.nigeria-path-card{min-height:auto}.nigeria-path-card h3{margin-top:52px}}
 
 /* Registration success state */
 .registration-success{min-height:620px;padding:70px 44px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
