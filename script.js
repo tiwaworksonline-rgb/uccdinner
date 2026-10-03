@@ -43,14 +43,14 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener("click",
 document.addEventListener("DOMContentLoaded",()=>{
   const form=document.querySelector("#lead-interest-form");
   if(!form) return;
-  const interestChecks=[...form.querySelectorAll('input[name="interest"]')];
+  const interestSelect=form.querySelector('select[name="interest"]');
   const syncPanels=()=>{
-    const selected=new Set(interestChecks.filter(i=>i.checked).map(i=>i.value));
-    document.querySelectorAll(".conditional-panel").forEach(panel=>{
-      panel.classList.toggle("is-visible",selected.has(panel.dataset.showFor));
+    const selected=interestSelect?.value||"";
+    form.querySelectorAll(".conditional-panel").forEach(panel=>{
+      panel.classList.toggle("is-visible",selected===panel.dataset.showFor);
     });
   };
-  interestChecks.forEach(i=>i.addEventListener("change",syncPanels));
+  interestSelect?.addEventListener("change",syncPanels);
   syncPanels();
 });
 
@@ -64,9 +64,10 @@ document.addEventListener("DOMContentLoaded",()=>{
     e.preventDefault();
     if(!form.reportValidity()) return;
 
-    const interests=[...form.querySelectorAll('input[name="interest"]:checked')].map(i=>i.value);
-    if(interests.length===0){
-      status.textContent="Choose at least one interest so we know what to send you.";
+    const interest=form.elements.interest?.value||"";
+    const interests=interest?[interest]:[];
+    if(!interest){
+      status.textContent="Choose an interest so we know what to send you.";
       status.classList.add("is-error");
       return;
     }
@@ -376,11 +377,10 @@ document.addEventListener("DOMContentLoaded",()=>{
   const params=new URLSearchParams(window.location.search);
   const interest=params.get("interest");
   if(!interest) return;
-  const checkbox=form.querySelector('input[name="interest"][value="'+interest+'"]');
-  if(checkbox){
-    checkbox.checked=true;
-    checkbox.dispatchEvent(new Event("change",{bubbles:true}));
-    const card=checkbox.closest(".interest-card");
-    if(card) card.scrollIntoView({behavior:"smooth",block:"center"});
+  const select=form.querySelector('select[name="interest"]');
+  if(select && [...select.options].some(option=>option.value===interest)){
+    select.value=interest;
+    select.dispatchEvent(new Event("change",{bubbles:true}));
+    select.scrollIntoView({behavior:"smooth",block:"center"});
   }
 });
