@@ -62,16 +62,19 @@
 
         <div class="form-section">
           <h3>What are you interested in?</h3>
-          <p class="form-help">Choose as many as you want.</p>
-          <div class="interest-grid">
-            <label class="interest-card"><input type="checkbox" name="interest" value="reunion"><span><b>🎟</b><strong>Reunion Weekend</strong><small>Tickets + weekend announcements</small></span></label>
-            <label class="interest-card"><input type="checkbox" name="interest" value="vip"><span><b>✦</b><strong>VIP</strong><small>Sections, tents + premium access</small></span></label>
-            <label class="interest-card"><input type="checkbox" name="interest" value="investment"><span><b>↗</b><strong>Invest</strong><small>Nigeria investment opportunities</small></span></label>
-            <label class="interest-card"><input type="checkbox" name="interest" value="travel"><span><b>✈</b><strong>Travel</strong><small>Curated trips to Nigeria</small></span></label>
-            <label class="interest-card"><input type="checkbox" name="interest" value="vendor"><span><b>▦</b><strong>Vendor</strong><small>Business + marketplace opportunities</small></span></label>
-            <label class="interest-card"><input type="checkbox" name="interest" value="sponsor"><span><b>◎</b><strong>Sponsor</strong><small>Brand + activation opportunities</small></span></label>
-            <label class="interest-card"><input type="checkbox" name="interest" value="media"><span><b>◉</b><strong>Media / Creator</strong><small>Coverage + content opportunities</small></span></label>
-          </div>
+          <p class="form-help">Choose the main area you want updates about.</p>
+          <label><span>Select interest *</span>
+            <select name="interest" id="interest-select" required>
+              <option value="">Choose an interest</option>
+              <option value="reunion">Reunion Weekend — Tickets + announcements</option>
+              <option value="vip">VIP — Sections, tents + premium access</option>
+              <option value="investment">Invest — Nigeria investment opportunities</option>
+              <option value="travel">Travel — Curated trips to Nigeria</option>
+              <option value="vendor">Vendor — Business + marketplace opportunities</option>
+              <option value="sponsor">Sponsor — Brand + activation opportunities</option>
+              <option value="media">Media / Content Creator — Coverage + content opportunities</option>
+            </select>
+          </label>
         </div>
 
         <div class="form-section conditional-panel" data-show-for="investment">
