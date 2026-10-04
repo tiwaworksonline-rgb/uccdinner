@@ -135,7 +135,8 @@ async function sendRegistrantConfirmation({leadType,name,email,body}){
     travel:"Travel",
     vendor:"Vendor",
     sponsor:"Sponsor",
-    media:"Media / Content Creator",
+    media:"Media",
+    creator:"Content Creator",
     "government-tourism":"Government / Tourism",
     talent:"Talent",
     speaker:"Speaker / Programming",
@@ -144,7 +145,7 @@ async function sendRegistrantConfirmation({leadType,name,email,body}){
   };
   const interestCopy={
     reunion:{
-      subject:copy.subject,
+      subject:"You’re on the Nigerian Reunion list",
       heading:"You’re on the list.",
       next:"We’ll send you ticket release alerts, weekend schedule updates, artist and experience announcements, and important Nigerian Reunion news as it drops."
     },
@@ -174,9 +175,14 @@ async function sendRegistrantConfirmation({leadType,name,email,body}){
       next:"We’ll share sponsorship opportunities, activation concepts, audience and brand-partnership updates, and next steps for organizations looking to engage Nigerian Reunion."
     },
     media:{
-      subject:"You’re on the Nigerian Reunion media + creator list",
+      subject:"Nigerian Reunion media interest received",
+      heading:"Media interest received.",
+      next:"We’ll keep you updated on media credential applications, press access, interview opportunities, event coverage details, approved media areas, and important deadlines as they are released."
+    },
+    creator:{
+      subject:"You’re on the Nigerian Reunion creator list",
       heading:"Creator interest received.",
-      next:"We’ll keep you updated on media credentials, content creator opportunities, coverage access, collaboration opportunities, and creator-related announcements."
+      next:"We’ll keep you updated on creator access, content opportunities, collaborations, campaign opportunities, event coverage, and creator-related announcements."
     },
     "government-tourism":{
       subject:"You’re on the Nigerian Reunion Government + Tourism list",
@@ -364,7 +370,8 @@ function generalInterestListNames(interests){
     travel:"Nigerian Reunion Travel Interest",
     vendor:"Nigerian Reunion Vendors",
     sponsor:"Nigerian Reunion Sponsors",
-    media:"Nigerian Reunion Media + Creators",
+    media:"Nigerian Reunion Media",
+    creator:"Nigerian Reunion Content Creators",
     "government-tourism":"Nigerian Reunion Government + Tourism"
   };
   const values=Array.isArray(interests)?interests:[];
@@ -537,7 +544,8 @@ server.listen(PORT,async()=>{
       "Nigerian Reunion Travel Interest",
       "Nigerian Reunion Vendors",
       "Nigerian Reunion Sponsors",
-      "Nigerian Reunion Media + Creators",
+      "Nigerian Reunion Media",
+      "Nigerian Reunion Content Creators",
       "Nigerian Reunion Government + Tourism",
       "Nigerian Reunion Speakers",
       "Nigerian Reunion Talent Interest",
