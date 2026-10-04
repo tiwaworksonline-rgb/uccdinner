@@ -43,15 +43,47 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener("click",
 document.addEventListener("DOMContentLoaded",()=>{
   const form=document.querySelector("#lead-interest-form");
   if(!form) return;
-  const interestSelect=form.querySelector('select[name="interest"]');
-  const syncPanels=()=>{
-    const selected=interestSelect?.value||"";
+  const interestChecks=[...form.querySelectorAll('input[name="interest"]')];
+  const multi=form.querySelector("#interest-multiselect");
+  const toggle=multi?.querySelector(".interest-multiselect-toggle");
+  const menu=multi?.querySelector(".interest-multiselect-menu");
+  const label=multi?.querySelector("#interest-multiselect-label");
+  const note=form.querySelector("#interest-selection-note");
+
+  const selectedValues=()=>interestChecks.filter(i=>i.checked).map(i=>i.value);
+  const syncInterestUI=()=>{
+    const selected=selectedValues();
     form.querySelectorAll(".conditional-panel").forEach(panel=>{
-      panel.classList.toggle("is-visible",selected===panel.dataset.showFor);
+      panel.classList.toggle("is-visible",selected.includes(panel.dataset.showFor));
     });
+    if(label){
+      label.textContent=selected.length===0
+        ?"Choose your interests"
+        :selected.length===1
+          ?interestChecks.find(i=>i.checked)?.closest("label")?.querySelector("strong")?.textContent||"1 interest selected"
+          :selected.length+" interests selected";
+    }
+    if(note){
+      note.textContent=selected.length
+        ?"You’ll receive updates for all "+selected.length+" selected interest"+(selected.length===1?"":"s")+"."
+        :"Select at least one interest.";
+      note.classList.toggle("is-success",selected.length>0);
+    }
   };
-  interestSelect?.addEventListener("change",syncPanels);
-  syncPanels();
+
+  toggle?.addEventListener("click",()=>{
+    const open=menu?.hasAttribute("hidden");
+    if(open) menu?.removeAttribute("hidden"); else menu?.setAttribute("hidden","");
+    toggle.setAttribute("aria-expanded",open?"true":"false");
+  });
+  interestChecks.forEach(i=>i.addEventListener("change",syncInterestUI));
+  document.addEventListener("click",(e)=>{
+    if(multi && !multi.contains(e.target)){
+      menu?.setAttribute("hidden","");
+      toggle?.setAttribute("aria-expanded","false");
+    }
+  });
+  syncInterestUI();
 });
 
 document.addEventListener("DOMContentLoaded",()=>{
@@ -64,11 +96,11 @@ document.addEventListener("DOMContentLoaded",()=>{
     e.preventDefault();
     if(!form.reportValidity()) return;
 
-    const interest=form.elements.interest?.value||"";
-    const interests=interest?[interest]:[];
-    if(!interest){
-      status.textContent="Choose an interest so we know what to send you.";
+    const interests=[...form.querySelectorAll('input[name="interest"]:checked')].map(i=>i.value);
+    if(!interests.length){
+      status.textContent="Choose at least one interest so we know what updates to send you.";
       status.classList.add("is-error");
+      form.querySelector("#interest-multiselect")?.scrollIntoView({behavior:"smooth",block:"center"});
       return;
     }
 
@@ -377,10 +409,10 @@ document.addEventListener("DOMContentLoaded",()=>{
   const params=new URLSearchParams(window.location.search);
   const interest=params.get("interest");
   if(!interest) return;
-  const select=form.querySelector('select[name="interest"]');
-  if(select && [...select.options].some(option=>option.value===interest)){
-    select.value=interest;
-    select.dispatchEvent(new Event("change",{bubbles:true}));
-    select.scrollIntoView({behavior:"smooth",block:"center"});
+  const checkbox=form.querySelector('input[name="interest"][value="'+CSS.escape(interest)+'"]');
+  if(checkbox){
+    checkbox.checked=true;
+    checkbox.dispatchEvent(new Event("change",{bubbles:true}));
+    form.querySelector("#interest-multiselect")?.scrollIntoView({behavior:"smooth",block:"center"});
   }
 });
