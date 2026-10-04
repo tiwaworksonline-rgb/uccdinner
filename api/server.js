@@ -210,13 +210,20 @@ async function sendRegistrantConfirmation({leadType,name,email,body}){
       next:"Your message has been received by the Nigerian Reunion team. We’ll review it and follow up as appropriate."
     }
   };
-  const copy=interestCopy[primaryInterest]||{
+  const isMultiInterest=leadType==="general" && interests.length>1;
+  const copy=isMultiInterest ? {
+    subject:"You’re on the Nigerian Reunion list",
+    heading:"You’re on the list.",
+    next:"You’ll receive Nigerian Reunion updates for every area you selected. We’ll keep your updates focused on those interests as announcements, applications, access and opportunities are released."
+  } : (interestCopy[primaryInterest]||{
     subject:"You’re on the Nigerian Reunion list",
     heading:"You’re on the list.",
     next:"We’ll keep you updated on Nigerian Reunion announcements, opportunities, programming, and the areas you selected."
-  };
-  const selectedLabel=interestLabelMap[primaryInterest]||label;
-  const details=selectedLabel ? `<p style="margin:18px 0 0"><strong>Your selected interest:</strong> ${htmlEscape(selectedLabel)}</p>` : "";
+  });
+  const selectedLabels=leadType==="general"
+    ? interests.map(v=>interestLabelMap[v]||v)
+    : [interestLabelMap[primaryInterest]||label].filter(Boolean);
+  const details=selectedLabels.length ? `<div style="margin:18px 0 0"><strong>Your selected interest${selectedLabels.length===1?"":"s"}:</strong><div style="margin-top:10px">${selectedLabels.map(v=>`<span style="display:inline-block;background:#eef6f1;border:1px solid #d9e8de;border-radius:999px;padding:7px 11px;margin:0 6px 6px 0;font-size:13px;font-weight:700;color:#174b35">${htmlEscape(v)}</span>`).join("")}</div>${selectedLabels.length>1?'<p style="margin:8px 0 0;color:#56635d;font-size:14px">You’ll receive updates for all of these choices.</p>':""}</div>` : "";
   const result=await brevo("/smtp/email",{
     method:"POST",
     body:JSON.stringify({
