@@ -62,21 +62,24 @@
 
         <div class="form-section">
           <h3>What are you interested in?</h3>
-          <p class="form-help">Choose the main area you want updates about.</p>
-          <label><span>Select interest *</span>
-            <select name="interest" id="interest-select" required>
-              <option value="">Choose an interest</option>
-              <option value="reunion">Reunion Weekend — Tickets + announcements</option>
-              <option value="vip">VIP — Sections, tents + premium access</option>
-              <option value="investment">Invest — Nigeria investment opportunities</option>
-              <option value="travel">Travel — Curated trips to Nigeria</option>
-              <option value="vendor">Vendor — Business + marketplace opportunities</option>
-              <option value="sponsor">Sponsor — Brand + activation opportunities</option>
-              <option value="government-tourism">Government / Tourism — Tourism boards, trade, investment + destination partnerships</option>
-              <option value="media">Media — Press access, credentials + coverage opportunities</option>
-              <option value="creator">Content Creator — Creator access, collaborations + content opportunities</option>
-            </select>
-          </label>
+          <p class="form-help">Choose all that apply. We’ll send updates for every area you select.</p>
+          <div class="interest-multiselect" id="interest-multiselect">
+            <button class="interest-multiselect-toggle" type="button" aria-expanded="false" aria-controls="interest-multiselect-menu">
+              <span id="interest-multiselect-label">Choose your interests</span><span aria-hidden="true">⌄</span>
+            </button>
+            <div class="interest-multiselect-menu" id="interest-multiselect-menu" hidden>
+              <label><input type="checkbox" name="interest" value="reunion"><span><strong>Reunion Weekend</strong><small>Tickets + announcements</small></span></label>
+              <label><input type="checkbox" name="interest" value="vip"><span><strong>VIP</strong><small>Sections, tents + premium access</small></span></label>
+              <label><input type="checkbox" name="interest" value="investment"><span><strong>Invest</strong><small>Nigeria investment opportunities</small></span></label>
+              <label><input type="checkbox" name="interest" value="travel"><span><strong>Travel</strong><small>Curated trips to Nigeria</small></span></label>
+              <label><input type="checkbox" name="interest" value="vendor"><span><strong>Vendor</strong><small>Business + marketplace opportunities</small></span></label>
+              <label><input type="checkbox" name="interest" value="sponsor"><span><strong>Sponsor</strong><small>Brand + activation opportunities</small></span></label>
+              <label><input type="checkbox" name="interest" value="government-tourism"><span><strong>Government / Tourism</strong><small>Tourism, trade, investment + destination partnerships</small></span></label>
+              <label><input type="checkbox" name="interest" value="media"><span><strong>Media</strong><small>Press access, credentials + coverage opportunities</small></span></label>
+              <label><input type="checkbox" name="interest" value="creator"><span><strong>Content Creator</strong><small>Creator access, collaborations + content opportunities</small></span></label>
+            </div>
+          </div>
+          <p class="form-help interest-selection-note" id="interest-selection-note">Select at least one interest.</p>
         </div>
 
         <div class="form-section conditional-panel" data-show-for="investment">
