@@ -126,8 +126,91 @@ async function sendRegistrantConfirmation({leadType,name,email,body}){
   const meta=await getNotificationMeta();
   const label=leadLabel(leadType,body);
   const firstName=String(name||"").trim().split(/\s+/)[0]||"there";
-  const interests=cleanList(body.interests);
-  const details=interests ? `<p style="margin:18px 0 0"><strong>Your selected interests:</strong> ${htmlEscape(interests)}</p>` : "";
+  const interests=Array.isArray(body.interests)?body.interests.map(v=>String(v).trim()).filter(Boolean):[];
+  const primaryInterest=interests[0]||leadType||"general";
+  const interestLabelMap={
+    reunion:"Reunion Weekend",
+    vip:"VIP",
+    investment:"Investment",
+    travel:"Travel",
+    vendor:"Vendor",
+    sponsor:"Sponsor",
+    media:"Media / Content Creator",
+    "government-tourism":"Government / Tourism",
+    talent:"Talent",
+    speaker:"Speaker / Programming",
+    civic:"Civic Engagement",
+    inquiry:"General Inquiry"
+  };
+  const interestCopy={
+    reunion:{
+      subject:copy.subject,
+      heading:"You’re on the list.",
+      next:"We’ll send you ticket release alerts, weekend schedule updates, artist and experience announcements, and important Nigerian Reunion news as it drops."
+    },
+    vip:{
+      subject:"You’re on the Nigerian Reunion VIP list",
+      heading:"VIP access starts here.",
+      next:"We’ll keep you posted on VIP releases, premium access, sections, tents, elevated experiences, and priority opportunities tied to Nigerian Reunion 2027."
+    },
+    investment:{
+      subject:"You’re on the Nigerian Reunion investment list",
+      heading:"You’re on the investment list.",
+      next:"We’ll share investment-focused updates, sector opportunities, curated discovery, introductions, and relevant opportunities across Nigeria as they develop."
+    },
+    travel:{
+      subject:"You’re on the Nigerian Reunion travel list",
+      heading:"Your Nigeria travel updates are coming.",
+      next:"We’ll keep you updated on curated Nigeria travel experiences, dates, cultural moments, trip details, and priority access as travel opportunities open."
+    },
+    vendor:{
+      subject:"You’re on the Nigerian Reunion vendor list",
+      heading:"Vendor interest received.",
+      next:"We’ll send marketplace application details, deadlines, requirements, vendor opportunities, and event updates relevant to businesses looking to activate on-site."
+    },
+    sponsor:{
+      subject:"You’re on the Nigerian Reunion sponsor list",
+      heading:"Partnership interest received.",
+      next:"We’ll share sponsorship opportunities, activation concepts, audience and brand-partnership updates, and next steps for organizations looking to engage Nigerian Reunion."
+    },
+    media:{
+      subject:"You’re on the Nigerian Reunion media + creator list",
+      heading:"Creator interest received.",
+      next:"We’ll keep you updated on media credentials, content creator opportunities, coverage access, collaboration opportunities, and creator-related announcements."
+    },
+    "government-tourism":{
+      subject:"You’re on the Nigerian Reunion Government + Tourism list",
+      heading:"Partnership interest received.",
+      next:"We’ll share opportunities for tourism boards, trade offices, investment promotion agencies, embassies, destinations, and public-sector partners to showcase travel, trade, investment, and cultural opportunities."
+    },
+    talent:{
+      subject:"Your Nigerian Reunion talent interest is received",
+      heading:"Talent submission received.",
+      next:"Your information is now in our programming pipeline. We’ll be in touch if there is a fit for artist, DJ, host, or performance opportunities."
+    },
+    speaker:{
+      subject:"Your Nigerian Reunion speaker interest is received",
+      heading:"Speaker submission received.",
+      next:"Your information is now in our programming review. We’ll be in touch if there is a fit for a conversation, panel, session, or featured speaking opportunity."
+    },
+    civic:{
+      subject:"You’re on the Nigerian Reunion civic list",
+      heading:"You’re on the civic update list.",
+      next:"We’ll share nonpartisan civic engagement updates, programming, and resources focused on participation, systems, and community voice."
+    },
+    inquiry:{
+      subject:"We received your Nigerian Reunion inquiry",
+      heading:"Thanks for reaching out.",
+      next:"Your message has been received by the Nigerian Reunion team. We’ll review it and follow up as appropriate."
+    }
+  };
+  const copy=interestCopy[primaryInterest]||{
+    subject:"You’re on the Nigerian Reunion list",
+    heading:"You’re on the list.",
+    next:"We’ll keep you updated on Nigerian Reunion announcements, opportunities, programming, and the areas you selected."
+  };
+  const selectedLabel=interestLabelMap[primaryInterest]||label;
+  const details=selectedLabel ? `<p style="margin:18px 0 0"><strong>Your selected interest:</strong> ${htmlEscape(selectedLabel)}</p>` : "";
   const result=await brevo("/smtp/email",{
     method:"POST",
     body:JSON.stringify({
@@ -144,12 +227,12 @@ async function sendRegistrantConfirmation({leadType,name,email,body}){
           </div>
 
           <div style="padding:34px 30px 30px">
-            <h1 style="font-size:42px;line-height:1.05;margin:0 0 14px;color:#07150f">You’re on the list.</h1>
+            <h1 style="font-size:42px;line-height:1.05;margin:0 0 14px;color:#07150f">${htmlEscape(copy.heading)}</h1>
             <p style="font-size:18px;line-height:1.65;margin:0 0 20px;color:#34443b">Hi ${htmlEscape(firstName)}, your registration has been received and you’re officially registered for Nigerian Reunion updates.</p>
 
             <div style="background:#f4f8f5;border:1px solid #dfe9e2;border-left:4px solid #13895a;border-radius:14px;padding:18px 20px;margin:24px 0">
               <div style="font-size:12px;font-weight:800;letter-spacing:.12em;color:#13895a;margin-bottom:8px">WHAT HAPPENS NEXT</div>
-              <p style="font-size:16px;line-height:1.65;margin:0;color:#34443b">We’ll keep you updated on ticket releases, schedule announcements, VIP experiences, travel opportunities, talent and programming news, and the specific opportunities you selected.</p>
+              <p style="font-size:16px;line-height:1.65;margin:0;color:#34443b">${htmlEscape(copy.next)}</p>
             </div>
 
             ${details}
