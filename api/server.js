@@ -127,7 +127,7 @@ async function sendRegistrantConfirmation({leadType,name,email,body}){
   const label=leadLabel(leadType,body);
   const firstName=String(name||"").trim().split(/\s+/)[0]||"there";
   const interests=Array.isArray(body.interests)?body.interests.map(v=>String(v).trim()).filter(Boolean):[];
-  const primaryInterest=interests[0]||leadType||"general";
+  const primaryInterest=leadType!=="general" ? leadType : (interests[0]||"general");
   const interestLabelMap={
     reunion:"Reunion Weekend",
     vip:"VIP",
@@ -222,7 +222,7 @@ async function sendRegistrantConfirmation({leadType,name,email,body}){
     body:JSON.stringify({
       sender:meta.sender,
       to:[{email,name}],
-      subject:"You’re on the Nigerian Reunion list",
+      subject:copy.subject,
       htmlContent:`<div style="margin:0;background:#eef3ef;padding:32px 14px;font-family:Arial,Helvetica,sans-serif;color:#07150f">
         <div style="max-width:680px;margin:0 auto;background:#ffffff;border-radius:20px;overflow:hidden;border:1px solid #dfe8e1">
 
