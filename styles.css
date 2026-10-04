@@ -408,3 +408,18 @@ button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
 
   .footer-links{gap:12px 16px}
 }
+
+
+/* Multi-select interest dropdown */
+.interest-multiselect{position:relative;margin-top:10px}
+.interest-multiselect-toggle{width:100%;min-height:56px;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);display:flex;align-items:center;justify-content:space-between;padding:0 16px;font:700 15px/1.2 "DM Sans",sans-serif;cursor:pointer}
+.interest-multiselect-toggle[aria-expanded="true"]{border-color:var(--green);box-shadow:0 0 0 3px rgba(19,137,90,.08)}
+.interest-multiselect-menu{position:absolute;z-index:30;top:calc(100% + 8px);left:0;right:0;max-height:390px;overflow:auto;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 18px 50px rgba(7,21,15,.14);padding:8px}
+.interest-multiselect-menu label{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:12px;cursor:pointer}
+.interest-multiselect-menu label:hover{background:#f4f8f5}
+.interest-multiselect-menu input{width:18px;height:18px;margin-top:2px;accent-color:var(--green)}
+.interest-multiselect-menu label>span{display:grid;gap:3px}
+.interest-multiselect-menu strong{font-size:14px;color:var(--ink)}
+.interest-multiselect-menu small{font-size:12px;line-height:1.35;color:var(--muted)}
+.interest-selection-note.is-success{color:var(--green);font-weight:700}
+@media(max-width:560px){.interest-multiselect-menu{position:static;margin-top:8px;max-height:none;box-shadow:none}}
