@@ -281,7 +281,8 @@ function generalInterestListNames(interests){
     travel:"Nigerian Reunion Travel Interest",
     vendor:"Nigerian Reunion Vendors",
     sponsor:"Nigerian Reunion Sponsors",
-    media:"Nigerian Reunion Media + Creators"
+    media:"Nigerian Reunion Media + Creators",
+    "government-tourism":"Nigerian Reunion Government + Tourism"
   };
   const values=Array.isArray(interests)?interests:[];
   return [...new Set(values.map(v=>map[String(v).trim()]).filter(Boolean))];
@@ -454,6 +455,7 @@ server.listen(PORT,async()=>{
       "Nigerian Reunion Vendors",
       "Nigerian Reunion Sponsors",
       "Nigerian Reunion Media + Creators",
+      "Nigerian Reunion Government + Tourism",
       "Nigerian Reunion Speakers",
       "Nigerian Reunion Talent Interest",
       "Nigerian Reunion Civic Interest",
