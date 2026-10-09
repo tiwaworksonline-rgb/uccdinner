@@ -540,3 +540,15 @@ button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
 
 .footer-instagram-left{margin-top:18px}
 .footer-bottom{justify-content:flex-start}
+
+.footer-instagram-left{vertical-align:middle}
+.footer-twitter{
+  width:36px;height:36px;border:1px solid var(--line);border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;
+  margin-left:10px;color:var(--ink);background:#fff;vertical-align:middle
+}
+.footer-twitter svg{
+  width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;
+  stroke-linecap:round;stroke-linejoin:round
+}
+.footer-twitter:hover{color:var(--green);border-color:rgba(25,167,102,.45)}
