@@ -519,3 +519,19 @@ button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
 }
 .footer-instagram:hover{border-color:rgba(25,167,102,.45)}
 .footer-instagram:hover:before{background:var(--green)}
+
+
+/* Reliable clickable Instagram footer icon */
+.footer-instagram{
+  width:36px!important;height:36px!important;border:1px solid var(--line)!important;border-radius:50%!important;
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  color:var(--ink)!important;background:#fff!important;text-decoration:none!important;
+  font-size:0!important;position:relative!important;z-index:2!important;cursor:pointer!important
+}
+.footer-instagram:before{content:none!important;display:none!important}
+.footer-instagram svg{
+  width:18px!important;height:18px!important;display:block!important;
+  fill:none!important;stroke:currentColor!important;stroke-width:1.8!important;
+  stroke-linecap:round!important;stroke-linejoin:round!important;pointer-events:none!important
+}
+.footer-instagram:hover{color:var(--green)!important;border-color:rgba(25,167,102,.45)!important}
