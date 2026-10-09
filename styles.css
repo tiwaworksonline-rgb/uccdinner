@@ -489,3 +489,18 @@ button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
   .about-principles{margin-top:42px}
   .directory-grid h3{font-size:28px}
 }
+
+
+/* Full site directory footer */
+.site-footer{display:block;padding:0;background:#fff;color:#65736d;border-top:1px solid var(--line)}
+.footer-main{display:grid;grid-template-columns:1.35fr repeat(3,minmax(0,1fr));gap:56px;padding:58px clamp(24px,7vw,110px) 48px}
+.footer-intro{max-width:360px}
+.footer-intro .footer-brand{font:800 16px/1.1 "Manrope",sans-serif;letter-spacing:.06em;color:var(--ink);margin-bottom:14px}
+.footer-intro p{font-size:14px;line-height:1.65;margin:0}
+.footer-column{display:flex;flex-direction:column;gap:10px}
+.footer-column strong{font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink);margin-bottom:6px}
+.footer-column a{color:#65736d;text-decoration:none;font-size:14px}
+.footer-column a:hover{color:var(--green)}
+.footer-bottom{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:20px clamp(24px,7vw,110px);border-top:1px solid var(--line);font-size:12px}
+@media(max-width:900px){.footer-main{grid-template-columns:1fr 1fr;gap:36px}}
+@media(max-width:560px){.footer-main{grid-template-columns:1fr;padding:44px 20px 36px}.footer-bottom{padding:18px 20px}}
