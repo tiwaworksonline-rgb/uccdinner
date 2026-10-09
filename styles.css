@@ -535,3 +535,8 @@ button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
   stroke-linecap:round!important;stroke-linejoin:round!important;pointer-events:none!important
 }
 .footer-instagram:hover{color:var(--green)!important;border-color:rgba(25,167,102,.45)!important}
+
+/* Footer social placement */
+
+.footer-instagram-left{margin-top:18px}
+.footer-bottom{justify-content:flex-start}
