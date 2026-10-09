@@ -423,3 +423,16 @@ button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
 .interest-multiselect-menu small{font-size:12px;line-height:1.35;color:var(--muted)}
 .interest-selection-note.is-success{color:var(--green);font-weight:700}
 @media(max-width:560px){.interest-multiselect-menu{position:static;margin-top:8px;max-height:none;box-shadow:none}}
+
+/* About Nigerian Reunion */
+.about-section{padding:96px 6vw;background:#f7f4ec;color:#0a2118;border-top:1px solid rgba(10,33,24,.08);border-bottom:1px solid rgba(10,33,24,.08)}
+.about-intro{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:54px;align-items:end;margin:22px 0 42px}
+.about-intro h2{font:800 clamp(38px,5.2vw,72px)/.96 "Manrope",sans-serif;letter-spacing:-.05em;margin:0;max-width:760px}
+.about-intro p{font-size:18px;line-height:1.7;margin:0;max-width:680px;color:#42534c}
+.about-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.about-card{background:#fff;border:1px solid rgba(10,33,24,.1);padding:30px;min-height:290px;display:flex;flex-direction:column}
+.about-card span{font:700 12px/1 "DM Sans",sans-serif;letter-spacing:.16em;color:#178447;margin-bottom:48px}
+.about-card h3{font:800 28px/1.05 "Manrope",sans-serif;letter-spacing:-.035em;margin:0 0 16px}
+.about-card p{font-size:16px;line-height:1.65;color:#4b5a54;margin:0}
+@media(max-width:900px){.about-intro{grid-template-columns:1fr;gap:22px}.about-grid{grid-template-columns:1fr}.about-card{min-height:0}.about-card span{margin-bottom:28px}}
+@media(max-width:560px){.about-section{padding:72px 22px}.about-intro h2{font-size:clamp(38px,11vw,52px)}.about-intro p{font-size:16px}.about-card{padding:24px}}
